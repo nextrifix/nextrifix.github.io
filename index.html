@@ -5,251 +5,535 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Afzal Malik — AI Translator & Future Strategist</title>
 <meta name="description" content="MBA · AI Translator · Future Strategist. Helping parents raise intentional children before 2030 changes everything.">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* ─── HOME HERO ──────────────────────────────────── */
-.hero {
-  min-height:100vh; display:flex; align-items:center; justify-content:center;
-  text-align:center; padding:140px 24px 100px; position:relative; overflow:hidden;
-}
-.hero::before {
-  content:''; position:absolute; inset:0; pointer-events:none;
-  background:
-    radial-gradient(ellipse 90% 70% at 50% -10%, rgba(109,40,217,0.22) 0%, transparent 65%),
-    radial-gradient(ellipse 60% 40% at 80% 90%, rgba(217,119,6,0.07) 0%, transparent 55%);
-}
-.hero-grid {
-  position:absolute; inset:0; pointer-events:none; opacity:0.025;
-  background-image:linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px);
-  background-size:70px 70px;
-}
-.orb {
-  position:absolute; border-radius:50%; pointer-events:none; filter:blur(90px);
-  animation:orb-float 10s ease-in-out infinite alternate;
-}
-.orb-1 { width:550px; height:550px; top:-150px; left:-120px; background:rgba(109,40,217,0.11); animation-delay:0s; }
-.orb-2 { width:420px; height:420px; bottom:-120px; right:-100px; background:rgba(124,58,237,0.09); animation-delay:4s; }
-.orb-3 { width:300px; height:300px; top:40%; left:65%; background:rgba(217,119,6,0.06); animation-delay:7s; }
-
-.hero-content { position:relative; z-index:1; max-width:800px; }
-.hero-badge {
-  display:inline-flex; align-items:center; gap:8px;
-  background:rgba(109,40,217,0.13); border:1px solid rgba(109,40,217,0.32);
-  color:var(--glow); padding:7px 20px; border-radius:99px;
-  font-size:0.72rem; font-weight:600; letter-spacing:2px; text-transform:uppercase;
-  margin-bottom:32px; animation:fadeUp 0.7s ease both;
-}
-.badge-dot { width:6px; height:6px; border-radius:50%; background:var(--glow); animation:pulse 2s infinite; }
-.hero h1 {
-  font-family:var(--serif); font-size:clamp(3rem,8.5vw,7rem);
-  font-weight:700; line-height:1.03; letter-spacing:-2px;
-  margin-bottom:20px; animation:fadeUp 0.7s 0.1s ease both;
-}
-.hero h1 .l1 { display:block; color:var(--text); }
-.hero h1 .l2 { display:block; color:var(--glow); font-style:italic; }
-.hero h1 .l3 { display:block; color:var(--gold2); }
-.hero-urdu {
-  font-family:var(--urdu); direction:rtl; font-size:clamp(1.2rem,2.5vw,1.8rem);
-  color:var(--muted2); margin:0 auto 20px; font-weight:600;
-  animation:fadeUp 0.7s 0.15s ease both;
-}
-.hero p {
-  font-size:clamp(1rem,2vw,1.15rem); color:var(--muted2); max-width:560px;
-  margin:0 auto 44px; line-height:1.85; font-weight:300;
-  animation:fadeUp 0.7s 0.2s ease both;
-}
-.hero-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; animation:fadeUp 0.7s 0.3s ease both; }
-.scroll-hint {
-  position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
-  display:flex; flex-direction:column; align-items:center; gap:8px;
-  color:var(--muted); font-size:0.68rem; letter-spacing:2.5px; text-transform:uppercase;
-  animation:fadeUp 0.7s 0.6s ease both;
-}
-.scroll-line {
-  width:1px; height:44px;
-  background:linear-gradient(to bottom, var(--glow), transparent);
-  animation:scroll-pulse 2s ease-in-out infinite;
-}
-@keyframes scroll-pulse {
-  0%   { opacity:0; transform:scaleY(0); transform-origin:top; }
-  50%  { opacity:1; transform:scaleY(1); }
-  100% { opacity:0; transform:scaleY(0); transform-origin:bottom; }
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --ink:     #08080f;
+  --ink2:    #0f0f1e;
+  --ink3:    #181830;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --violet:  #6d28d9;
+  --violet2: #7c3aed;
+  --glow:    #a78bfa;
+  --gold:    #d97706;
+  --gold2:   #f59e0b;
+  --teal:    #0d9488;
+  --teal2:   #14b8a6;
+  --text:    #e4e4f0;
+  --muted:   #6b7a99;
+  --muted2:  #9aa3bf;
+  --serif:   'Cormorant Garamond', Georgia, serif;
+  --sans:    'Outfit', sans-serif;
+  --urdu:    'Noto Nastaliq Urdu', serif;
+  --radius:  14px;
+  --t:       0.32s;
+  --ease:    cubic-bezier(0.4,0,0.2,1);
 }
 
-/* ─── ABOUT STRIP ────────────────────────────────── */
-.about-section { background:var(--ink); }
-.about-grid { display:grid; grid-template-columns:1.1fr 0.9fr; gap:72px; align-items:center; }
-.about-text p { color:var(--muted2); line-height:1.9; margin-bottom:16px; font-weight:300; font-size:1rem; }
-.about-text p strong { color:var(--text); font-weight:500; }
-.about-sig { font-family:var(--serif); font-size:2rem; font-style:italic; color:var(--glow); margin-top:28px; }
-.stats { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-.stat {
-  background:var(--ink2); border:1px solid var(--border); border-radius:var(--radius);
-  padding:24px 20px; text-align:center;
-  transition:border-color var(--t), transform var(--t);
-}
-.stat:hover { border-color:rgba(109,40,217,0.38); transform:translateY(-3px); }
-.stat-num { font-family:var(--serif); font-size:2.8rem; font-weight:700; color:var(--glow); display:block; line-height:1; }
-.stat-lbl { color:var(--muted); font-size:0.8rem; margin-top:6px; display:block; }
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+body{background:var(--ink);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.7;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;display:block;}
+button{cursor:pointer;font-family:var(--sans);}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--ink);}
+::-webkit-scrollbar-thumb{background:var(--violet2);border-radius:99px;}
 
-/* ─── CATEGORIES STRIP ───────────────────────────── */
-.cats-section { background:var(--ink2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-.cats-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-top:44px; }
-.cat-card {
-  background:var(--ink); border:1px solid var(--border); border-radius:var(--radius);
-  padding:28px 20px; text-align:center; text-decoration:none;
-  transition:all var(--t); display:block; position:relative; overflow:hidden;
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:18px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(8,8,15,0.88);
+  backdrop-filter:blur(20px) saturate(160%);
+  border-bottom:1px solid var(--border);
+  transition:padding var(--t) var(--ease);
 }
-.cat-card::after {
-  content:''; position:absolute; bottom:0; left:0; right:0; height:2px;
-  background:linear-gradient(90deg, transparent, var(--violet2), transparent);
-  transform:scaleX(0); transition:transform 0.4s;
+.nav.scrolled{padding:12px 48px;}
+.nav-logo{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--text);}
+.nav-logo em{color:var(--glow);font-style:italic;}
+.nav-links{display:flex;gap:4px;list-style:none;align-items:center;}
+.nav-links a{
+  font-size:0.8rem;font-weight:500;color:var(--muted);
+  padding:7px 13px;border-radius:8px;
+  transition:all var(--t) var(--ease);
+  cursor:pointer;
 }
-.cat-card:hover { border-color:rgba(109,40,217,0.38); transform:translateY(-4px); }
-.cat-card:hover::after { transform:scaleX(1); }
-.cat-icon { font-size:2.2rem; margin-bottom:12px; }
-.cat-title { font-size:0.88rem; font-weight:600; color:var(--text); margin-bottom:4px; }
-.cat-urdu { font-family:var(--urdu); direction:rtl; font-size:0.8rem; color:var(--muted); }
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:rgba(255,255,255,0.05);}
+.nav-links a.active{color:var(--glow);}
+.nav-cta{background:var(--violet2)!important;color:#fff!important;padding:8px 20px!important;border-radius:8px!important;}
+.nav-cta:hover{background:#5b21b6!important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.hamburger span{width:22px;height:1.5px;background:var(--text);border-radius:99px;transition:var(--t);}
 
-/* ─── FEATURED ───────────────────────────────────── */
-.featured-section { background:var(--ink); }
-.featured-tabs { display:flex; gap:6px; margin-bottom:40px; background:var(--ink2); padding:5px; border-radius:12px; display:inline-flex; }
-.ftab {
-  font-size:0.82rem; font-weight:500; padding:9px 20px; border-radius:9px;
-  border:none; background:transparent; color:var(--muted2); transition:all var(--t);
+/* Mobile Nav */
+.mobile-nav{
+  display:none;position:fixed;inset:0;z-index:499;
+  background:rgba(8,8,15,0.97);backdrop-filter:blur(24px);
+  flex-direction:column;align-items:center;justify-content:center;gap:28px;
 }
-.ftab.active { background:var(--violet2); color:#fff; }
+.mobile-nav.open{display:flex;}
+.mobile-nav a{font-family:var(--serif);font-size:2rem;color:var(--text);font-weight:700;transition:color var(--t);cursor:pointer;}
+.mobile-nav a:hover{color:var(--glow);}
+.mobile-close{position:absolute;top:24px;right:28px;font-size:1.8rem;color:var(--muted);cursor:pointer;}
 
-/* ─── 21 DAYS STRIP ──────────────────────────────── */
-.series-strip {
-  background:linear-gradient(135deg,#0d0a26,#1a1040);
-  border-top:1px solid rgba(109,40,217,0.2); border-bottom:1px solid rgba(109,40,217,0.2);
-}
-.series-inner { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
-.weeks-preview { display:flex; flex-direction:column; gap:12px; }
-.week-row {
-  display:flex; align-items:center; gap:16px;
-  background:rgba(255,255,255,0.03); border:1px solid var(--border);
-  border-radius:10px; padding:14px 18px;
-  transition:border-color var(--t), transform var(--t);
-}
-.week-row:hover { border-color:rgba(109,40,217,0.35); transform:translateX(6px); }
-.week-n { font-family:var(--serif); font-size:2rem; font-weight:700; color:rgba(109,40,217,0.3); min-width:36px; }
-.week-label-sm { font-size:0.68rem; letter-spacing:2px; text-transform:uppercase; color:var(--glow); font-weight:600; }
-.week-name { font-size:0.92rem; color:var(--text); font-weight:500; }
-.week-sub { font-size:0.8rem; color:var(--muted); }
+/* ═══════════════════════════════════════════
+   PAGE SYSTEM
+═══════════════════════════════════════════ */
+.page{display:none;}
+.page.active{display:block;}
 
-/* ─── RESPONSIVE HOME ────────────────────────────── */
-@media(max-width:960px) {
-  .cats-grid { grid-template-columns:repeat(3,1fr); }
-  .about-grid, .series-inner { grid-template-columns:1fr; gap:40px; }
+/* ═══════════════════════════════════════════
+   COMMON
+═══════════════════════════════════════════ */
+section{padding:100px 24px;position:relative;}
+.container{max-width:1040px;margin:0 auto;}
+.container-sm{max-width:720px;margin:0 auto;}
+.eyebrow{font-size:0.7rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--glow);font-weight:600;margin-bottom:12px;}
+.urdu-sub{font-family:var(--urdu);direction:rtl;color:var(--muted2);font-size:1rem;margin-bottom:8px;display:block;}
+.section-title{font-family:var(--serif);font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.1;letter-spacing:-0.5px;margin-bottom:16px;}
+.section-title em{color:var(--glow);font-style:italic;}
+.section-body{color:var(--muted2);font-size:1rem;line-height:1.9;font-weight:300;}
+.divider{height:1px;background:var(--border);}
+
+/* Page Hero */
+.page-hero{padding:160px 24px 100px;text-align:center;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(109,40,217,0.18) 0%,transparent 65%);pointer-events:none;}
+.page-hero-grid{position:absolute;inset:0;pointer-events:none;opacity:0.025;background-image:linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px);background-size:60px 60px;}
+.page-hero-content{position:relative;z-index:1;max-width:760px;margin:0 auto;}
+.page-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(109,40,217,0.14);border:1px solid rgba(109,40,217,0.3);color:var(--glow);padding:6px 18px;border-radius:99px;font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;animation:fadeUp 0.6s ease both;}
+.page-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--glow);animation:pulse 2s infinite;}
+.page-hero h1{font-family:var(--serif);font-size:clamp(2.8rem,7vw,5.5rem);font-weight:700;line-height:1.08;letter-spacing:-1px;margin-bottom:20px;animation:fadeUp 0.6s 0.1s ease both;}
+.page-hero h1 em{color:var(--glow);font-style:italic;}
+.page-hero .urdu-title{font-family:var(--urdu);font-size:clamp(1.4rem,3vw,2.2rem);color:var(--muted2);direction:rtl;margin-bottom:20px;animation:fadeUp 0.6s 0.15s ease both;font-weight:600;}
+.page-hero p{font-size:1.05rem;color:var(--muted2);max-width:560px;margin:0 auto;line-height:1.85;font-weight:300;animation:fadeUp 0.6s 0.2s ease both;}
+
+/* Buttons */
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--violet2);color:#fff;padding:13px 30px;border-radius:10px;font-size:0.9rem;font-weight:500;border:1px solid var(--violet2);transition:all var(--t) var(--ease);cursor:pointer;}
+.btn-primary:hover{background:#5b21b6;transform:translateY(-2px);box-shadow:0 14px 36px rgba(109,40,217,0.4);}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--text);padding:13px 30px;border-radius:10px;font-size:0.9rem;font-weight:500;border:1px solid var(--border2);transition:all var(--t) var(--ease);cursor:pointer;}
+.btn-ghost:hover{border-color:rgba(167,139,250,0.5);color:var(--glow);transform:translateY(-2px);}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#fff;padding:13px 30px;border-radius:10px;font-size:0.9rem;font-weight:500;transition:all var(--t) var(--ease);cursor:pointer;}
+.btn-gold:hover{background:#b45309;transform:translateY(-2px);}
+
+/* Cards */
+.card{background:var(--ink2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color var(--t),transform var(--t),box-shadow var(--t);position:relative;}
+.card:hover{border-color:rgba(109,40,217,0.4);transform:translateY(-5px);box-shadow:0 24px 56px rgba(0,0,0,0.35);}
+.card-tag{font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;margin-bottom:10px;display:inline-block;padding:3px 10px;border-radius:99px;}
+.tag-violet{color:var(--glow);background:rgba(109,40,217,0.12);border:1px solid rgba(109,40,217,0.2);}
+.tag-gold{color:var(--gold2);background:rgba(217,119,6,0.12);border:1px solid rgba(217,119,6,0.2);}
+.tag-teal{color:var(--teal2);background:rgba(13,148,136,0.12);border:1px solid rgba(13,148,136,0.2);}
+.tag-rose{color:#fb7185;background:rgba(225,29,72,0.12);border:1px solid rgba(225,29,72,0.2);}
+
+/* Grids */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+
+/* Filter */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;}
+.filter-btn{font-size:0.8rem;font-weight:500;padding:8px 18px;border-radius:99px;border:1px solid var(--border2);background:transparent;color:var(--muted2);transition:all var(--t) var(--ease);cursor:pointer;}
+.filter-btn:hover,.filter-btn.active{background:rgba(109,40,217,0.15);border-color:rgba(109,40,217,0.4);color:var(--glow);}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease);}
+.reveal.visible{opacity:1;transform:none;}
+
+/* Newsletter */
+.nl-section{background:var(--ink2);border-top:1px solid var(--border);padding:80px 24px;}
+.nl-box{background:linear-gradient(135deg,#100d2e,#1a1040);border:1px solid rgba(109,40,217,0.3);border-radius:20px;padding:60px 48px;text-align:center;max-width:680px;margin:0 auto;position:relative;overflow:hidden;}
+.nl-box::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:400px;height:300px;background:radial-gradient(ellipse,rgba(109,40,217,0.18),transparent 70%);pointer-events:none;}
+.nl-box h2{font-family:var(--serif);font-size:2.4rem;font-weight:700;margin-bottom:8px;}
+.nl-box h2 em{color:var(--glow);font-style:italic;}
+.nl-box p{color:var(--muted2);margin-bottom:32px;font-size:0.95rem;line-height:1.8;font-weight:300;}
+.nl-form{display:flex;gap:10px;max-width:440px;margin:0 auto;}
+.nl-input{flex:1;padding:13px 16px;background:rgba(255,255,255,0.05);border:1px solid var(--border2);border-radius:9px;color:var(--text);font-family:var(--sans);font-size:0.9rem;outline:none;transition:border-color var(--t);}
+.nl-input::placeholder{color:var(--muted);}
+.nl-input:focus{border-color:rgba(109,40,217,0.55);}
+.nl-btn{background:var(--violet2);color:#fff;padding:13px 22px;border:none;border-radius:9px;font-family:var(--sans);font-size:0.88rem;font-weight:500;white-space:nowrap;transition:all var(--t);cursor:pointer;}
+.nl-btn:hover{background:#5b21b6;transform:translateY(-1px);}
+
+/* Footer */
+.footer{background:var(--ink);border-top:1px solid var(--border);padding:56px 48px 36px;}
+.footer-inner{max-width:1040px;margin:0 auto;}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+.footer-brand .nav-logo{margin-bottom:14px;display:block;}
+.footer-brand p{font-size:0.85rem;color:var(--muted);line-height:1.8;max-width:220px;font-weight:300;}
+.footer-urdu{font-family:var(--urdu);direction:rtl;font-size:0.85rem;color:var(--muted);margin-top:8px;}
+.footer-col h4{font-size:0.68rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.footer-col ul li a{font-size:0.85rem;color:var(--muted2);transition:color var(--t);cursor:pointer;}
+.footer-col ul li a:hover{color:var(--glow);}
+.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:0.8rem;color:var(--muted);}
+.footer-copy a{color:var(--glow);}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(0.7);}}
+@keyframes orb-float{from{transform:translate(0,0);}to{transform:translate(20px,15px);}}
+@keyframes scroll-pulse{0%{opacity:0;transform:scaleY(0);transform-origin:top;}50%{opacity:1;transform:scaleY(1);}100%{opacity:0;transform:scaleY(0);transform-origin:bottom;}}
+
+/* ═══════════════════════════════════════════
+   HOME PAGE
+═══════════════════════════════════════════ */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:140px 24px 100px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 90% 70% at 50% -10%,rgba(109,40,217,0.22) 0%,transparent 65%),radial-gradient(ellipse 60% 40% at 80% 90%,rgba(217,119,6,0.07) 0%,transparent 55%);}
+.hero-grid{position:absolute;inset:0;pointer-events:none;opacity:0.025;background-image:linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px);background-size:70px 70px;}
+.orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(90px);animation:orb-float 10s ease-in-out infinite alternate;}
+.orb-1{width:550px;height:550px;top:-150px;left:-120px;background:rgba(109,40,217,0.11);}
+.orb-2{width:420px;height:420px;bottom:-120px;right:-100px;background:rgba(124,58,237,0.09);animation-delay:4s;}
+.orb-3{width:300px;height:300px;top:40%;left:65%;background:rgba(217,119,6,0.06);animation-delay:7s;}
+.hero-content{position:relative;z-index:1;max-width:800px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(109,40,217,0.13);border:1px solid rgba(109,40,217,0.32);color:var(--glow);padding:7px 20px;border-radius:99px;font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:32px;animation:fadeUp 0.7s ease both;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--glow);animation:pulse 2s infinite;}
+.hero h1{font-family:var(--serif);font-size:clamp(3rem,8.5vw,7rem);font-weight:700;line-height:1.03;letter-spacing:-2px;margin-bottom:20px;animation:fadeUp 0.7s 0.1s ease both;}
+.hero h1 .l1{display:block;color:var(--text);}
+.hero h1 .l2{display:block;color:var(--glow);font-style:italic;}
+.hero h1 .l3{display:block;color:var(--gold2);}
+.hero-urdu{font-family:var(--urdu);direction:rtl;font-size:clamp(1.2rem,2.5vw,1.8rem);color:var(--muted2);margin:0 auto 20px;font-weight:600;animation:fadeUp 0.7s 0.15s ease both;}
+.hero p{font-size:clamp(1rem,2vw,1.15rem);color:var(--muted2);max-width:560px;margin:0 auto 44px;line-height:1.85;font-weight:300;animation:fadeUp 0.7s 0.2s ease both;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp 0.7s 0.3s ease both;}
+.scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:0.68rem;letter-spacing:2.5px;text-transform:uppercase;}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--glow),transparent);animation:scroll-pulse 2s ease-in-out infinite;}
+
+/* Cats */
+.cats-section{background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.cats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:44px;}
+.cat-card{background:var(--ink);border:1px solid var(--border);border-radius:var(--radius);padding:28px 20px;text-align:center;cursor:pointer;transition:all var(--t);display:block;position:relative;overflow:hidden;}
+.cat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--violet2),transparent);transform:scaleX(0);transition:transform 0.4s;}
+.cat-card:hover{border-color:rgba(109,40,217,0.38);transform:translateY(-4px);}
+.cat-card:hover::after{transform:scaleX(1);}
+.cat-icon{font-size:2.2rem;margin-bottom:12px;}
+.cat-title{font-size:0.88rem;font-weight:600;color:var(--text);margin-bottom:4px;}
+.cat-urdu{font-family:var(--urdu);direction:rtl;font-size:0.8rem;color:var(--muted);}
+
+/* About */
+.about-section{background:var(--ink);}
+.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:72px;align-items:center;}
+.about-text p{color:var(--muted2);line-height:1.9;margin-bottom:16px;font-weight:300;font-size:1rem;}
+.about-text p strong{color:var(--text);font-weight:500;}
+.about-sig{font-family:var(--serif);font-size:2rem;font-style:italic;color:var(--glow);margin-top:28px;}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.stat{background:var(--ink2);border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;text-align:center;transition:border-color var(--t),transform var(--t);}
+.stat:hover{border-color:rgba(109,40,217,0.38);transform:translateY(-3px);}
+.stat-num{font-family:var(--serif);font-size:2.8rem;font-weight:700;color:var(--glow);display:block;line-height:1;}
+.stat-lbl{color:var(--muted);font-size:0.8rem;margin-top:6px;display:block;}
+
+/* Series strip */
+.series-strip{background:linear-gradient(135deg,#0d0a26,#1a1040);border-top:1px solid rgba(109,40,217,0.2);border-bottom:1px solid rgba(109,40,217,0.2);}
+.series-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.weeks-preview{display:flex;flex-direction:column;gap:12px;}
+.week-row{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px 18px;transition:border-color var(--t),transform var(--t);cursor:pointer;}
+.week-row:hover{border-color:rgba(109,40,217,0.35);transform:translateX(6px);}
+.week-n{font-family:var(--serif);font-size:2rem;font-weight:700;color:rgba(109,40,217,0.3);min-width:36px;}
+.week-label-sm{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--glow);font-weight:600;}
+.week-name{font-size:0.92rem;color:var(--text);font-weight:500;}
+.week-sub{font-size:0.8rem;color:var(--muted);}
+
+/* ═══════════════════════════════════════════
+   EBOOKS PAGE
+═══════════════════════════════════════════ */
+.ebook-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+.ebook-card{background:var(--ink2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all var(--t);position:relative;}
+.ebook-card:hover{border-color:rgba(109,40,217,0.4);transform:translateY(-6px);box-shadow:0 28px 60px rgba(0,0,0,0.4);}
+.ebook-cover{height:200px;display:flex;align-items:center;justify-content:center;position:relative;}
+.ebook-cover-inner{width:120px;border-radius:10px;padding:18px 14px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.5);transform:perspective(500px) rotateY(-8deg);transition:transform 0.4s;}
+.ebook-card:hover .ebook-cover-inner{transform:perspective(500px) rotateY(-3deg) translateY(-4px);}
+.ebook-year{font-family:var(--serif);font-size:1.6rem;font-weight:700;display:block;}
+.ebook-cover-title{font-size:0.68rem;font-weight:600;color:rgba(255,255,255,0.85);line-height:1.3;margin-top:5px;}
+.ebook-body{padding:22px;}
+.ebook-title{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.3;}
+.ebook-urdu{font-family:var(--urdu);direction:rtl;font-size:0.88rem;color:var(--muted2);margin-bottom:10px;display:block;}
+.ebook-desc{font-size:0.84rem;color:var(--muted);line-height:1.75;margin-bottom:16px;font-weight:300;}
+.ebook-meta{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--border);}
+.ebook-chapters{font-size:0.78rem;color:var(--muted);}
+.ebook-price{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--gold2);}
+.ebook-free{color:var(--teal2);}
+.ebook-status{position:absolute;top:12px;right:12px;font-size:0.65rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:99px;}
+.status-soon{background:rgba(217,119,6,0.2);color:var(--gold2);border:1px solid rgba(217,119,6,0.3);}
+.status-free{background:rgba(13,148,136,0.2);color:var(--teal2);border:1px solid rgba(13,148,136,0.3);}
+.feat-ebook{background:linear-gradient(135deg,#0d0a26,#1a1040);border:1px solid rgba(109,40,217,0.35);border-radius:20px;padding:56px 48px;display:grid;grid-template-columns:0.7fr 1.3fr;gap:60px;align-items:center;margin-bottom:64px;}
+.feat-cover{background:linear-gradient(145deg,#1e1040,#2d1b69,#1a0f4a);border-radius:16px;padding:44px 28px;text-align:center;border:1px solid rgba(109,40,217,0.4);box-shadow:0 40px 80px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.07);transform:perspective(700px) rotateY(-8deg);transition:transform 0.5s;}
+.feat-cover:hover{transform:perspective(700px) rotateY(-3deg) translateY(-6px);}
+.feat-year{font-family:var(--serif);font-size:4.5rem;font-weight:700;color:var(--gold2);display:block;line-height:1;}
+.feat-title{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:#fff;margin:8px 0 6px;line-height:1.3;}
+.feat-sub{color:#a78bfa;font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;}
+.feat-author{margin-top:20px;color:rgba(255,255,255,0.45);font-family:var(--serif);font-style:italic;font-size:0.9rem;}
+
+/* ═══════════════════════════════════════════
+   SERIES PAGE
+═══════════════════════════════════════════ */
+.arc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:64px;}
+.arc-card{background:var(--ink2);border:1px solid var(--border);border-radius:var(--radius);padding:32px 26px;position:relative;overflow:hidden;transition:all var(--t);}
+.arc-card:hover{border-color:rgba(109,40,217,0.4);transform:translateY(-4px);}
+.arc-num{font-family:var(--serif);font-size:4rem;font-weight:700;color:rgba(109,40,217,0.15);line-height:1;margin-bottom:8px;}
+.arc-badge{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:10px;display:block;}
+.arc-title{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:6px;}
+.arc-urdu{font-family:var(--urdu);direction:rtl;font-size:0.9rem;color:var(--muted2);margin-bottom:14px;display:block;}
+.arc-desc{font-size:0.87rem;color:var(--muted);line-height:1.75;font-weight:300;}
+.arc-bottom{position:absolute;bottom:0;left:0;right:0;height:3px;}
+.week-block{margin-bottom:56px;}
+.week-block-header{display:flex;align-items:center;gap:20px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.wbh-num{font-family:var(--serif);font-size:3rem;font-weight:700;color:rgba(109,40,217,0.2);line-height:1;}
+.wbh-label{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:3px;}
+.wbh-title{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--text);}
+.wbh-line{flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent);}
+.days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;}
+.day-pill{background:var(--ink);border:1px solid var(--border);border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;transition:all var(--t);}
+.day-pill:hover{border-color:rgba(109,40,217,0.4);transform:translateY(-3px);background:rgba(109,40,217,0.05);}
+.day-pill.free-day{border-color:rgba(13,148,136,0.4);background:rgba(13,148,136,0.05);}
+.day-n{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--glow);display:block;line-height:1;margin-bottom:4px;}
+.day-pill.free-day .day-n{color:var(--teal2);}
+.day-topic-icon{font-size:1.2rem;margin-bottom:4px;display:block;}
+.day-short{font-size:0.65rem;color:var(--muted);line-height:1.3;}
+.sp-box{background:linear-gradient(135deg,#0d0a26,#1a1040);border:1px solid rgba(109,40,217,0.3);border-radius:var(--radius);padding:48px 40px;margin-top:56px;}
+.sp-hook{font-size:1.1rem;color:var(--gold2);font-weight:600;line-height:1.5;margin-bottom:16px;border-left:3px solid var(--gold2);padding-left:16px;}
+.sp-body{font-size:0.92rem;color:var(--muted2);line-height:1.9;font-weight:300;}
+
+/* ═══════════════════════════════════════════
+   COURSES PAGE
+═══════════════════════════════════════════ */
+.course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.course-card{background:var(--ink2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all var(--t);}
+.course-card:hover{border-color:rgba(109,40,217,0.4);transform:translateY(-5px);box-shadow:0 24px 56px rgba(0,0,0,0.35);}
+.course-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;}
+.course-body{padding:24px;}
+.course-title{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.3;}
+.course-urdu{font-family:var(--urdu);direction:rtl;font-size:0.88rem;color:var(--muted2);margin-bottom:10px;display:block;}
+.course-desc{font-size:0.85rem;color:var(--muted);line-height:1.75;margin-bottom:16px;font-weight:300;}
+.course-footer{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--border);}
+.course-price{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--gold2);}
+.c-soon{font-size:0.68rem;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:99px;background:rgba(217,119,6,0.15);color:var(--gold2);border:1px solid rgba(217,119,6,0.25);}
+.c-free{font-size:0.68rem;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:99px;background:rgba(13,148,136,0.15);color:var(--teal2);border:1px solid rgba(13,148,136,0.25);}
+.feat-course{background:linear-gradient(135deg,#0d0a26,#1a1040);border:1px solid rgba(109,40,217,0.3);border-radius:20px;padding:48px 40px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:56px;}
+
+/* ═══════════════════════════════════════════
+   BLOG PAGE
+═══════════════════════════════════════════ */
+.blog-layout{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start;}
+.blog-featured{background:var(--ink2);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:28px;transition:all var(--t);}
+.blog-featured:hover{border-color:rgba(109,40,217,0.4);transform:translateY(-3px);}
+.bf-thumb{height:240px;background:linear-gradient(135deg,#1a1040,#2d1b69);display:flex;align-items:center;justify-content:center;font-size:5rem;}
+.bf-body{padding:32px;}
+.bf-title{font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.2;}
+.bf-urdu{font-family:var(--urdu);direction:rtl;font-size:1rem;color:var(--muted2);margin-bottom:12px;display:block;}
+.bf-excerpt{font-size:0.95rem;color:var(--muted);line-height:1.8;margin-bottom:20px;font-weight:300;}
+.bf-meta{display:flex;align-items:center;gap:16px;font-size:0.8rem;color:var(--muted);}
+.blog-list{display:flex;flex-direction:column;gap:14px;}
+.blog-item{background:var(--ink2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:grid;grid-template-columns:70px 1fr;gap:16px;align-items:center;transition:all var(--t);cursor:pointer;}
+.blog-item:hover{border-color:rgba(109,40,217,0.38);transform:translateX(4px);}
+.bi-thumb{height:70px;border-radius:8px;background:linear-gradient(135deg,var(--ink3),var(--ink2));display:flex;align-items:center;justify-content:center;font-size:1.8rem;}
+.bi-title{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.3;}
+.bi-urdu{font-family:var(--urdu);direction:rtl;font-size:0.8rem;color:var(--muted2);margin-bottom:6px;display:block;}
+.bi-meta{font-size:0.75rem;color:var(--muted);}
+.sidebar-widget{background:var(--ink2);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:18px;}
+.sw-title{font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--glow);font-weight:600;margin-bottom:14px;}
+.cat-link{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem;color:var(--muted2);cursor:pointer;transition:color var(--t);}
+.cat-link:last-child{border-bottom:none;}
+.cat-link:hover{color:var(--glow);}
+.ci-count{background:rgba(109,40,217,0.15);color:var(--glow);padding:2px 8px;border-radius:99px;font-size:0.72rem;}
+
+/* ═══════════════════════════════════════════
+   CATEGORIES PAGE
+═══════════════════════════════════════════ */
+.cat-section-block{margin-bottom:72px;}
+.cat-section-block:last-child{margin-bottom:0;}
+.cat-header{display:flex;align-items:center;gap:20px;padding:28px 32px;border-radius:var(--radius);margin-bottom:24px;position:relative;overflow:hidden;}
+.ch-icon{font-size:2.8rem;position:relative;z-index:1;}
+.ch-info{position:relative;z-index:1;flex:1;}
+.ch-label{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:4px;}
+.ch-title{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--text);}
+.ch-urdu{font-family:var(--urdu);direction:rtl;font-size:1rem;color:var(--muted2);margin-top:2px;display:block;}
+.ch-count{font-family:var(--serif);font-size:3rem;font-weight:700;opacity:0.2;position:relative;z-index:1;}
+.topics-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.topic-item{background:var(--ink2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 18px;transition:all var(--t);cursor:pointer;}
+.topic-item:hover{border-color:rgba(109,40,217,0.38);transform:translateY(-3px);}
+.ti-icon{font-size:1.6rem;margin-bottom:10px;}
+.ti-title{font-size:0.92rem;font-weight:600;color:var(--text);margin-bottom:4px;}
+.ti-urdu{font-family:var(--urdu);direction:rtl;font-size:0.8rem;color:var(--muted);display:block;margin-bottom:8px;}
+.ti-desc{font-size:0.8rem;color:var(--muted);line-height:1.65;font-weight:300;}
+.cat-edu .cat-header{background:rgba(13,148,136,0.08);border:1px solid rgba(13,148,136,0.2);}
+.cat-edu .ch-label{color:var(--teal2);}
+.cat-jobs .cat-header{background:rgba(109,40,217,0.08);border:1px solid rgba(109,40,217,0.2);}
+.cat-jobs .ch-label{color:var(--glow);}
+.cat-food .cat-header{background:rgba(217,119,6,0.08);border:1px solid rgba(217,119,6,0.2);}
+.cat-food .ch-label{color:var(--gold2);}
+.cat-tech .cat-header{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);}
+.cat-tech .ch-label{color:#60a5fa;}
+.cat-corp .cat-header{background:rgba(244,63,94,0.08);border:1px solid rgba(244,63,94,0.2);}
+.cat-corp .ch-label{color:#fb7185;}
+
+/* ═══════════════════════════════════════════
+   ABOUT PAGE
+═══════════════════════════════════════════ */
+.about-main{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.profile-card{background:var(--ink2);border:1px solid var(--border);border-radius:20px;padding:40px 32px;text-align:center;position:sticky;top:100px;}
+.profile-avatar{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--glow));margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2.5rem;font-weight:700;color:#fff;}
+.profile-name{font-family:var(--serif);font-size:1.8rem;font-weight:700;margin-bottom:4px;}
+.profile-title{color:var(--glow);font-size:0.82rem;letter-spacing:1px;margin-bottom:6px;}
+.profile-urdu{font-family:var(--urdu);direction:rtl;font-size:0.9rem;color:var(--muted2);margin-bottom:18px;display:block;}
+.pdivider{height:1px;background:var(--border);margin:18px 0;}
+.profile-stat{display:flex;justify-content:space-between;align-items:center;padding:8px 0;}
+.ps-label{font-size:0.82rem;color:var(--muted);}
+.ps-value{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--glow);}
+.story-block{margin-bottom:40px;}
+.story-block h3{font-family:var(--serif);font-size:1.6rem;font-weight:700;margin-bottom:12px;}
+.story-block h3 em{color:var(--glow);font-style:italic;}
+.story-block p{color:var(--muted2);line-height:1.9;margin-bottom:14px;font-size:0.97rem;font-weight:300;}
+.story-block p strong{color:var(--text);font-weight:500;}
+.mission-box{background:linear-gradient(135deg,#0d0a26,#1a1040);border:1px solid rgba(109,40,217,0.3);border-radius:var(--radius);padding:32px;margin:28px 0;}
+.mission-quote{font-family:var(--serif);font-size:1.4rem;font-style:italic;color:var(--text);line-height:1.5;margin-bottom:10px;}
+.mission-quote em{color:var(--glow);}
+.values-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px;}
+.value-item{background:var(--ink2);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;gap:12px;align-items:flex-start;}
+.vi-icon{font-size:1.2rem;margin-top:2px;}
+.vi-text strong{display:block;font-size:0.88rem;color:var(--text);margin-bottom:3px;}
+.vi-text span{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+
+/* ═══════════════════════════════════════════
+   CONTACT PAGE
+═══════════════════════════════════════════ */
+.contact-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:start;}
+.contact-method{background:var(--ink2);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;display:flex;align-items:center;gap:16px;transition:all var(--t);margin-bottom:12px;cursor:pointer;}
+.contact-method:hover{border-color:rgba(109,40,217,0.38);transform:translateX(4px);}
+.cm-icon{font-size:1.5rem;}
+.cm-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:600;margin-bottom:2px;}
+.cm-value{font-size:0.92rem;color:var(--text);}
+.form-card{background:var(--ink2);border:1px solid var(--border);border-radius:20px;padding:36px;}
+.form-card h3{font-family:var(--serif);font-size:1.6rem;font-weight:700;margin-bottom:6px;}
+.form-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-group{margin-bottom:16px;}
+.form-group label{display:block;font-size:0.72rem;font-weight:600;color:var(--muted2);margin-bottom:7px;text-transform:uppercase;letter-spacing:0.5px;}
+.form-input,.form-textarea,.form-select{width:100%;padding:12px 15px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:var(--sans);font-size:0.9rem;outline:none;transition:border-color var(--t);}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--muted);}
+.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:rgba(109,40,217,0.5);}
+.form-select{cursor:pointer;}
+.form-select option{background:var(--ink2);}
+.form-textarea{height:120px;resize:vertical;}
+.form-submit{width:100%;background:var(--violet2);color:#fff;padding:14px;border:none;border-radius:9px;font-family:var(--sans);font-size:0.92rem;font-weight:500;transition:all var(--t);cursor:pointer;}
+.form-submit:hover{background:#5b21b6;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,40,217,0.4);}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px;}
+.faq-item{background:var(--ink);border:1px solid var(--border);border-radius:var(--radius);padding:24px;}
+.faq-q{font-family:var(--serif);font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:8px;}
+.faq-urdu{font-family:var(--urdu);direction:rtl;font-size:0.85rem;color:var(--muted2);margin-bottom:8px;display:block;}
+.faq-a{font-size:0.87rem;color:var(--muted);line-height:1.75;font-weight:300;}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:960px){
+  .grid-3,.ebook-grid,.course-grid,.arc-grid,.topics-row{grid-template-columns:repeat(2,1fr);}
+  .cats-grid{grid-template-columns:repeat(3,1fr);}
+  .about-grid,.series-inner,.feat-ebook,.feat-course,.blog-layout,.about-main,.contact-layout{grid-template-columns:1fr;gap:36px;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
+  .days-grid{grid-template-columns:repeat(4,1fr);}
+  .values-grid,.faq-grid,.form-row2{grid-template-columns:1fr;}
 }
-@media(max-width:600px) {
-  .cats-grid { grid-template-columns:1fr 1fr; }
-  .hero-btns { flex-direction:column; align-items:center; }
-  .stats { grid-template-columns:1fr 1fr; }
+@media(max-width:768px){
+  .nav{padding:14px 20px;}
+  .nav.scrolled{padding:10px 20px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  section{padding:72px 18px;}
+  .cats-grid{grid-template-columns:repeat(2,1fr);}
+  .grid-3,.ebook-grid,.course-grid,.arc-grid{grid-template-columns:1fr;}
+  .nl-form{flex-direction:column;}
+  .nl-box{padding:40px 22px;}
+  .footer{padding:44px 20px 28px;}
+  .footer-grid{grid-template-columns:1fr;gap:28px;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .page-hero{padding:130px 18px 72px;}
+  .hero-btns{flex-direction:column;align-items:center;}
+  .days-grid{grid-template-columns:repeat(3,1fr);}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ═══ NAV ═══ -->
 <nav class="nav" id="nav">
-  <a href="index.html" class="nav-logo">Afzal <em>Malik</em></a>
+  <span class="nav-logo" onclick="showPage('home')">Afzal <em>Malik</em></span>
   <ul class="nav-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="series.html">21 Days</a></li>
-    <li><a href="courses.html">Courses</a></li>
-    <li><a href="ebooks.html">eBooks</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="categories.html">Topics</a></li>
-    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    <li><a onclick="showPage('about')">About</a></li>
+    <li><a onclick="showPage('series')">21 Days</a></li>
+    <li><a onclick="showPage('courses')">Courses</a></li>
+    <li><a onclick="showPage('ebooks')">eBooks</a></li>
+    <li><a onclick="showPage('blog')">Blog</a></li>
+    <li><a onclick="showPage('categories')">Topics</a></li>
+    <li><a onclick="showPage('contact')" class="nav-cta">Contact</a></li>
   </ul>
   <div class="hamburger" onclick="toggleMobileNav()"><span></span><span></span><span></span></div>
 </nav>
+
 <div class="mobile-nav" id="mobileNav">
   <span class="mobile-close" onclick="toggleMobileNav()">✕</span>
-  <a href="about.html"      onclick="toggleMobileNav()">About</a>
-  <a href="series.html"     onclick="toggleMobileNav()">21 Days</a>
-  <a href="courses.html"    onclick="toggleMobileNav()">Courses</a>
-  <a href="ebooks.html"     onclick="toggleMobileNav()">eBooks</a>
-  <a href="blog.html"       onclick="toggleMobileNav()">Blog</a>
-  <a href="categories.html" onclick="toggleMobileNav()">Topics</a>
-  <a href="contact.html"    onclick="toggleMobileNav()">Contact</a>
+  <a onclick="showPage('about');toggleMobileNav()">About</a>
+  <a onclick="showPage('series');toggleMobileNav()">21 Days</a>
+  <a onclick="showPage('courses');toggleMobileNav()">Courses</a>
+  <a onclick="showPage('ebooks');toggleMobileNav()">eBooks</a>
+  <a onclick="showPage('blog');toggleMobileNav()">Blog</a>
+  <a onclick="showPage('categories');toggleMobileNav()">Topics</a>
+  <a onclick="showPage('contact');toggleMobileNav()">Contact</a>
 </div>
 
-<!-- HERO -->
+<!-- ════════════════════════════════════════
+     HOME PAGE
+════════════════════════════════════════ -->
+<div id="page-home" class="page active">
 <section class="hero">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
     <div class="hero-badge"><span class="badge-dot"></span>MBA · AI Translator · Future Strategist</div>
-    <h1>
-      <span class="l1">Parenting</span>
-      <span class="l2">with Intention</span>
-      <span class="l3">Before 2030</span>
-    </h1>
+    <h1><span class="l1">Parenting</span><span class="l2">with Intention</span><span class="l3">Before 2030</span></h1>
     <div class="hero-urdu">ارادے کے ساتھ پرورش — 2030 سے پہلے</div>
     <p>I help parents, teachers, and professionals understand what's coming — and raise children who are prepared, not just provided for.</p>
     <div class="hero-btns">
-      <a href="series.html"  class="btn-primary">📅 21-Day Challenge Shuru Karein</a>
-      <a href="ebooks.html"  class="btn-ghost">📚 eBooks Dekhein</a>
+      <button class="btn-primary" onclick="showPage('series')">📅 21-Day Challenge Shuru Karein</button>
+      <button class="btn-ghost" onclick="showPage('ebooks')">📚 eBooks Dekhein</button>
     </div>
   </div>
   <div class="scroll-hint"><div class="scroll-line"></div>scroll</div>
 </section>
 
-<!-- CATEGORIES -->
 <section class="cats-section">
   <div class="container">
-    <div class="reveal" style="text-align:center;margin-bottom:0;">
+    <div style="text-align:center;margin-bottom:0;">
       <div class="eyebrow">Topics / موضوعات</div>
       <h2 class="section-title">Woh <em>5 Categories</em> Jo Matter Karti Hain</h2>
     </div>
-    <div class="cats-grid reveal">
-      <a href="categories.html#education" class="cat-card">
-        <div class="cat-icon">🎓</div>
-        <div class="cat-title">Future of Education</div>
-        <div class="cat-urdu">تعلیم کا مستقبل</div>
-      </a>
-      <a href="categories.html#jobs" class="cat-card">
-        <div class="cat-icon">💼</div>
-        <div class="cat-title">Jobs & Careers</div>
-        <div class="cat-urdu">نوکریاں اور کیریئر</div>
-      </a>
-      <a href="categories.html#food" class="cat-card">
-        <div class="cat-icon">🍎</div>
-        <div class="cat-title">Food Deceptions</div>
-        <div class="cat-urdu">خوراک کی حقیقت</div>
-      </a>
-      <a href="categories.html#tech" class="cat-card">
-        <div class="cat-icon">🤖</div>
-        <div class="cat-title">Tech & AI</div>
-        <div class="cat-urdu">ٹیکنالوجی اور اے آئی</div>
-      </a>
-      <a href="categories.html#corporate" class="cat-card">
-        <div class="cat-icon">🏢</div>
-        <div class="cat-title">Corporate Sector</div>
-        <div class="cat-urdu">کارپوریٹ سیکٹر</div>
-      </a>
+    <div class="cats-grid" style="margin-top:44px;">
+      <div class="cat-card" onclick="showPage('categories')"><div class="cat-icon">🎓</div><div class="cat-title">Future of Education</div><div class="cat-urdu">تعلیم کا مستقبل</div></div>
+      <div class="cat-card" onclick="showPage('categories')"><div class="cat-icon">💼</div><div class="cat-title">Jobs & Careers</div><div class="cat-urdu">نوکریاں اور کیریئر</div></div>
+      <div class="cat-card" onclick="showPage('categories')"><div class="cat-icon">🍎</div><div class="cat-title">Food Deceptions</div><div class="cat-urdu">خوراک کی حقیقت</div></div>
+      <div class="cat-card" onclick="showPage('categories')"><div class="cat-icon">🤖</div><div class="cat-title">Tech & AI</div><div class="cat-urdu">ٹیکنالوجی اور اے آئی</div></div>
+      <div class="cat-card" onclick="showPage('categories')"><div class="cat-icon">🏢</div><div class="cat-title">Corporate Sector</div><div class="cat-urdu">کارپوریٹ سیکٹر</div></div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT STRIP -->
 <section class="about-section">
   <div class="container">
     <div class="about-grid">
-      <div class="about-text reveal">
+      <div class="about-text">
         <div class="eyebrow">About / میرے بارے میں</div>
         <h2 class="section-title">MBA Jisne <em>AI Revolution</em> Ko Decode Kiya</h2>
         <p>Main Afzal Malik hoon — MBA student, AI researcher, aur woh insaan jo <strong>AGI aur ASI</strong> ka matlab aapke ghar, aapke bacchon, aur aapke career ke liye simple zubaan mein explain karta hai.</p>
-        <p>Zyada tar AI content engineers ke liye likha jata hai. Main <strong>baaki sab ke liye</strong> likhta hoon — woh parents jo apne bacchon ke liye career choose kar rahe hain, woh teachers jo students ko tayar kar rahe hain un jobs ke liye jo abhi exist hi nahi karti.</p>
+        <p>Zyada tar AI content engineers ke liye likha jata hai. Main <strong>baaki sab ke liye</strong> likhta hoon — woh parents jo apne bacchon ke liye career choose kar rahe hain, woh teachers jo students ko tayar kar rahe hain.</p>
         <div class="about-sig">Afzal Malik</div>
       </div>
-      <div class="stats reveal">
+      <div class="stats">
         <div class="stat"><span class="stat-num">2030</span><span class="stat-lbl">Sab kuch badal jayega</span></div>
         <div class="stat"><span class="stat-num">21</span><span class="stat-lbl">Din ka challenge</span></div>
         <div class="stat"><span class="stat-num">12</span><span class="stat-lbl">eBook chapters</span></div>
@@ -259,96 +543,514 @@
   </div>
 </section>
 
-<!-- 21 DAYS STRIP -->
 <section class="series-strip">
   <div class="container">
     <div class="series-inner">
-      <div class="reveal">
+      <div>
         <div class="eyebrow">Series / سلسلہ</div>
         <h2 class="section-title">21-Day <em>Parenting Revolution</em></h2>
         <span class="urdu-sub">21 دن میں ارادے کے ساتھ والدین بنیں</span>
         <p class="section-body" style="margin-bottom:28px;">Teen hafton mein ek complete transformation — science-backed, practically designed, aur Pakistan ke parents ke liye.</p>
-        <a href="series.html" class="btn-primary">🚀 Series Dekhein</a>
+        <button class="btn-primary" onclick="showPage('series')">🚀 Series Dekhein</button>
       </div>
-      <div class="weeks-preview reveal">
-        <div class="week-row">
-          <div class="week-n">01</div>
-          <div><div class="week-label-sm">Week One</div><div class="week-name">🔔 The Wake-Up</div><div class="week-sub">Autopilot tod dein</div></div>
-        </div>
-        <div class="week-row">
-          <div class="week-n">02</div>
-          <div><div class="week-label-sm">Week Two</div><div class="week-name">🧠 The Science</div><div class="week-sub">Research samjhein</div></div>
-        </div>
-        <div class="week-row">
-          <div class="week-n">03</div>
-          <div><div class="week-label-sm">Week Three</div><div class="week-name">⚡ The Action</div><div class="week-sub">Aaj se amal karein</div></div>
-        </div>
+      <div class="weeks-preview">
+        <div class="week-row" onclick="showPage('series')"><div class="week-n">01</div><div><div class="week-label-sm">Week One</div><div class="week-name">🔔 The Wake-Up</div><div class="week-sub">Autopilot tod dein</div></div></div>
+        <div class="week-row" onclick="showPage('series')"><div class="week-n">02</div><div><div class="week-label-sm">Week Two</div><div class="week-name">🧠 The Science</div><div class="week-sub">Research samjhein</div></div></div>
+        <div class="week-row" onclick="showPage('series')"><div class="week-n">03</div><div><div class="week-label-sm">Week Three</div><div class="week-name">⚡ The Action</div><div class="week-sub">Aaj se amal karein</div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- NEWSLETTER -->
-<div class="nl-section">
-  <div class="container">
-    <div class="nl-box reveal">
-      <div class="eyebrow">Newsletter</div>
-      <h2>The <em>2030</em> Brief</h2>
-      <span class="urdu-sub">ہر اتوار — ایک اہم بصیرت</span>
-      <p>Har Sunday — ek AI insight, ek parenting tool, ek career tip, aur ek 2030 prediction. Bilkul free.</p>
-      <form class="nl-form" onsubmit="return false;">
-        <input class="nl-input" type="email" placeholder="aapka@email.com">
-        <button class="nl-btn" type="submit">Subscribe Karein →</button>
+<div class="nl-section"><div class="container"><div class="nl-box">
+  <div class="eyebrow">Newsletter</div>
+  <h2>The <em>2030</em> Brief</h2>
+  <span class="urdu-sub">ہر اتوار — ایک اہم بصیرت</span>
+  <p>Har Sunday — ek AI insight, ek parenting tool, ek career tip, aur ek 2030 prediction. Bilkul free.</p>
+  <form class="nl-form" onsubmit="handleNL(event)"><input class="nl-input" type="email" placeholder="aapka@email.com" required><button class="nl-btn" type="submit">Subscribe Karein →</button></form>
+</div></div></div>
+
+<footer class="footer"><div class="footer-inner">
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="nav-logo" onclick="showPage('home')" style="cursor:pointer;">Afzal <em>Malik</em></span><p>Helping parents raise intentional children before 2030 changes everything.</p><div class="footer-urdu">2030 سے پہلے ارادے کے ساتھ</div></div>
+    <div class="footer-col"><h4>Pages</h4><ul><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('series')">21-Day Series</a></li><li><a onclick="showPage('courses')">Courses</a></li><li><a onclick="showPage('ebooks')">eBooks</a></li></ul></div>
+    <div class="footer-col"><h4>Content</h4><ul><li><a onclick="showPage('blog')">Blog</a></li><li><a onclick="showPage('categories')">Categories</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Follow</h4><ul><li><a href="https://youtube.com" target="_blank">YouTube</a></li><li><a href="https://instagram.com" target="_blank">Instagram</a></li><li><a href="https://tiktok.com" target="_blank">TikTok</a></li><li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><div class="footer-copy">© 2025 Afzal Malik · <a href="https://iafzalmalik.me">iafzalmalik.me</a> · Built with purpose in Pakistan 🇵🇰</div></div>
+</div></footer>
+</div><!-- /home -->
+
+<!-- ════════════════════════════════════════
+     EBOOKS PAGE
+════════════════════════════════════════ -->
+<div id="page-ebooks" class="page">
+<div class="page-hero"><div class="page-hero-grid"></div><div class="page-hero-content">
+  <div class="page-eyebrow"><span class="page-eyebrow-dot"></span>eBooks / ڈیجیٹل کتابیں</div>
+  <h1>eBooks Jo <em>Zindagi</em> Badalein</h1>
+  <div class="urdu-title">وہ کتابیں جو آپ کو تیار کریں گی</div>
+  <p>Research-backed, plain language mein likhi gayi — parents, professionals, aur future ke liye tayyar rehne wale logon ke liye.</p>
+</div></div>
+
+<section><div class="container">
+  <div class="feat-ebook">
+    <div class="feat-cover"><span class="feat-year">2030</span><div class="feat-title">Jobs: The Complete Survival Guide</div><div class="feat-sub">In the AI & AGI Era</div><div class="feat-author">by Afzal Malik</div></div>
+    <div>
+      <span class="card-tag tag-gold">⭐ Featured eBook</span>
+      <div class="eyebrow" style="margin-top:12px;">Coming Soon on Gumroad</div>
+      <h2 class="section-title" style="font-size:2.2rem;">2030 Jobs: <em>Complete Survival Guide</em></h2>
+      <span class="urdu-sub">2030 نوکریاں: مکمل رہنما</span>
+      <p class="section-body" style="margin-bottom:24px;">12 chapters mein har woh insaan jo AI revolution se affected hoga — parents, teachers, professionals, students, aur business owners. MBA ki zubaan mein, engineer ki nahi.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn-primary" onclick="showPage('contact')">📩 Launch Par Notify Karein</button>
+        <button class="btn-ghost" onclick="showPage('series')">📅 Free 21-Day Series</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterItems(this,'all')">Sab / All</button>
+    <button class="filter-btn" onclick="filterItems(this,'parenting')">Parenting</button>
+    <button class="filter-btn" onclick="filterItems(this,'ai')">AI & Tech</button>
+    <button class="filter-btn" onclick="filterItems(this,'career')">Career</button>
+    <button class="filter-btn" onclick="filterItems(this,'food')">Food</button>
+  </div>
+
+  <div class="ebook-grid">
+    <div class="ebook-card" data-cat="parenting"><div class="ebook-status status-free">Free</div><div class="ebook-cover" style="background:linear-gradient(135deg,#1a1040,#2d1b69);"><div class="ebook-cover-inner" style="background:linear-gradient(145deg,#2d1b69,#4c1d95);"><span class="ebook-year" style="color:#f59e0b;">7</span><div class="ebook-cover-title">Signs of Autopilot Parenting</div></div></div><div class="ebook-body"><div class="card-tag tag-teal">Free Download</div><div class="ebook-title">7 Signs You're Parenting on Autopilot</div><span class="ebook-urdu">7 نشانیاں — غفلت کی پرورش</span><div class="ebook-desc">Ek honest self-assessment — intentionally parent kar rahe hain ya sirf hope kar rahe hain.</div><div class="ebook-meta"><span class="ebook-chapters">📄 12 pages</span><span class="ebook-price ebook-free">FREE</span></div></div></div>
+
+    <div class="ebook-card" data-cat="ai"><div class="ebook-status status-soon">Coming Soon</div><div class="ebook-cover" style="background:linear-gradient(135deg,#0a1628,#1e3a5f);"><div class="ebook-cover-inner" style="background:linear-gradient(145deg,#1e3a5f,#2563eb);"><span class="ebook-year" style="color:#93c5fd;font-size:1.5rem;">AGI</span><div class="ebook-cover-title">Plain Language Guide</div></div></div><div class="ebook-body"><div class="card-tag tag-violet">AI & Tech</div><div class="ebook-title">AGI & ASI — Bilkul Simple</div><span class="ebook-urdu">اے جی آئی — آسان زبان میں</span><div class="ebook-desc">AGI, ASI, aur AI ka matlab aapke ghar aur career ke liye — bina jargon ke.</div><div class="ebook-meta"><span class="ebook-chapters">📄 60 pages</span><span class="ebook-price">PKR 499</span></div></div></div>
+
+    <div class="ebook-card" data-cat="food"><div class="ebook-status status-soon">Coming Soon</div><div class="ebook-cover" style="background:linear-gradient(135deg,#1a0a00,#3b1a00);"><div class="ebook-cover-inner" style="background:linear-gradient(145deg,#78350f,#d97706);"><span class="ebook-year" style="color:#fef3c7;font-size:1.2rem;">Food</span><div class="ebook-cover-title">Deceptions Explained</div></div></div><div class="ebook-body"><div class="card-tag tag-gold">Food & Health</div><div class="ebook-title">Food Deceptions — Sachchi Baat</div><span class="ebook-urdu">کھانے کی حقیقت</span><div class="ebook-desc">Sugar industry, processed food, aur gut health ke baare mein woh truths jo aapke bacchon ki zindagi badal sakti hain.</div><div class="ebook-meta"><span class="ebook-chapters">📄 80 pages</span><span class="ebook-price">PKR 699</span></div></div></div>
+
+    <div class="ebook-card" data-cat="career"><div class="ebook-status status-soon">Coming Soon</div><div class="ebook-cover" style="background:linear-gradient(135deg,#0a1a0a,#1a3a1a);"><div class="ebook-cover-inner" style="background:linear-gradient(145deg,#14532d,#16a34a);"><span class="ebook-year" style="color:#bbf7d0;font-size:1.2rem;">Career</span><div class="ebook-cover-title">2030 Proof Your Path</div></div></div><div class="ebook-body"><div class="card-tag tag-teal">Career</div><div class="ebook-title">2030-Proof Career Guide</div><span class="ebook-urdu">2030 تک محفوظ کیریئر</span><div class="ebook-desc">Woh careers jo AI replace karega aur woh jo survive karenge — aur aap apne bachche ko kahan guide karein.</div><div class="ebook-meta"><span class="ebook-chapters">📄 90 pages</span><span class="ebook-price">PKR 799</span></div></div></div>
+
+    <div class="ebook-card" data-cat="parenting"><div class="ebook-status status-soon">Coming Soon</div><div class="ebook-cover" style="background:linear-gradient(135deg,#1a0a1a,#3b0a3b);"><div class="ebook-cover-inner" style="background:linear-gradient(145deg,#6b21a8,#9333ea);"><span class="ebook-year" style="color:#e9d5ff;font-size:1.1rem;">Identity</span><div class="ebook-cover-title">Building Character</div></div></div><div class="ebook-body"><div class="card-tag tag-violet">Parenting</div><div class="ebook-title">Identity Is Built, Not Born</div><span class="ebook-urdu">شخصیت بنائی جاتی ہے</span><div class="ebook-desc">Aapka bachcha kaisa insaan banega — yeh aapke hari roz ke choices decide karti hain.</div><div class="ebook-meta"><span class="ebook-chapters">📄 75 pages</span><span class="ebook-price">PKR 599</span></div></div></div>
+
+    <div class="ebook-card" data-cat="ai"><div class="ebook-status status-soon">Coming Soon</div><div class="ebook-cover" style="background:linear-gradient(135deg,#0a1428,#1e2a50);"><div class="ebook-cover-inner" style="background:linear-gradient(145deg,#1e3a8a,#3b82f6);"><span class="ebook-year" style="color:#bfdbfe;font-size:1rem;">AI Tools</span><div class="ebook-cover-title">No-Code Business</div></div></div><div class="ebook-body"><div class="card-tag tag-violet">AI for Business</div><div class="ebook-title">AI Tools for Pakistani Businesses</div><span class="ebook-urdu">پاکستانی کاروبار کے لیے اے آئی</span><div class="ebook-desc">Bina code ke, koi bhi business AI tools se faida utha sakta hai — is hafte se shuru karke.</div><div class="ebook-meta"><span class="ebook-chapters">📄 65 pages</span><span class="ebook-price">PKR 899</span></div></div></div>
+  </div>
+</div></section>
+<div class="nl-section"><div class="container"><div class="nl-box"><div class="eyebrow">Newsletter</div><h2>The <em>2030</em> Brief</h2><span class="urdu-sub">نئی کتاب کی اطلاع پائیں</span><p>Jab bhi nayi eBook launch ho, aapko sabse pehle pata chale. Har Sunday free insight bhi.</p><form class="nl-form" onsubmit="handleNL(event)"><input class="nl-input" type="email" placeholder="aapka@email.com" required><button class="nl-btn">Subscribe Karein →</button></form></div></div></div>
+<footer class="footer"><div class="footer-inner"><div class="footer-grid"><div class="footer-brand"><span class="nav-logo" onclick="showPage('home')" style="cursor:pointer;">Afzal <em>Malik</em></span><p>Helping parents raise intentional children before 2030 changes everything.</p></div><div class="footer-col"><h4>Pages</h4><ul><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('series')">21-Day Series</a></li><li><a onclick="showPage('courses')">Courses</a></li><li><a onclick="showPage('ebooks')">eBooks</a></li></ul></div><div class="footer-col"><h4>Content</h4><ul><li><a onclick="showPage('blog')">Blog</a></li><li><a onclick="showPage('categories')">Categories</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div><div class="footer-col"><h4>Follow</h4><ul><li><a href="#" target="_blank">YouTube</a></li><li><a href="#" target="_blank">Instagram</a></li><li><a href="#" target="_blank">TikTok</a></li><li><a href="#" target="_blank">LinkedIn</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copy">© 2025 Afzal Malik · iafzalmalik.me · 🇵🇰</div></div></div></footer>
+</div><!-- /ebooks -->
+
+<!-- ════════════════════════════════════════
+     SERIES PAGE
+════════════════════════════════════════ -->
+<div id="page-series" class="page">
+<div class="page-hero"><div class="page-hero-grid"></div><div class="page-hero-content">
+  <div class="page-eyebrow"><span class="page-eyebrow-dot"></span>21-Day Series / 21 روزہ سلسلہ</div>
+  <h1>Parenting <em>Revolution</em></h1>
+  <div class="urdu-title">21 دن میں ارادے کے ساتھ والدین بنیں</div>
+  <p>Teen hafton mein complete transformation. Autopilot se intention ki taraf. Science-backed — Pakistani parents ke liye.</p>
+</div></div>
+
+<section><div class="container">
+  <div style="text-align:center;margin-bottom:48px;"><div class="eyebrow">3 Arcs / 3 مراحل</div><h2 class="section-title">Har <em>Week</em> Ka Ek Maqsad</h2></div>
+  <div class="arc-grid">
+    <div class="arc-card"><div class="arc-bottom" style="background:linear-gradient(90deg,#e11d48,#fb7185);"></div><div class="arc-num">01</div><span class="arc-badge" style="color:#fb7185;">Week One / پہلا ہفتہ</span><div class="arc-title">🔔 The Wake-Up</div><span class="arc-urdu">بیداری — غفلت توڑیں</span><div class="arc-desc">Autopilot tod dein. Parents ko ek productive bechain karo. Woh aaram-dah sochna jo unhe roktaa hai — woh toorna zaruri hai.</div></div>
+    <div class="arc-card"><div class="arc-bottom" style="background:linear-gradient(90deg,#0d9488,#14b8a6);"></div><div class="arc-num">02</div><span class="arc-badge" style="color:#14b8a6;">Week Two / دوسرا ہفتہ</span><div class="arc-title">🧠 The Science</div><span class="arc-urdu">سائنس — سمجھیں کیوں</span><div class="arc-desc">Research unhe dein. Gut-brain axis, identity formation, antifragility — sab kuch plain language mein.</div></div>
+    <div class="arc-card"><div class="arc-bottom" style="background:linear-gradient(90deg,#7c3aed,#a78bfa);"></div><div class="arc-num">03</div><span class="arc-badge" style="color:var(--glow);">Week Three / تیسرا ہفتہ</span><div class="arc-title">⚡ The Action</div><span class="arc-urdu">عمل — آج سے شروع کریں</span><div class="arc-desc">Practical tools jo is hafte se use ho sakein. Food audit, money talk, connection ritual, family mission.</div></div>
+  </div>
+
+  <div class="sp-box">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;"><span style="background:rgba(13,148,136,0.15);border:1px solid rgba(13,148,136,0.3);color:var(--teal2);padding:6px 14px;border-radius:99px;font-size:0.75rem;font-weight:600;">✓ Free — Day 1 Script</span><div style="font-family:var(--serif);font-size:1.5rem;font-weight:700;">Are You Parenting on Autopilot?</div></div>
+    <div class="sp-hook">"Most parents provide for their children. Very few prepare them. There's a difference — and it's the difference that changes everything."</div>
+    <div class="sp-body">Ek simple sawaal — aakhri baar kab aapne socha ke aap apne bachche mein <em>kya bana rahe hain?</em><br><br>School nahi. Clothes nahi. Khana nahi — balke <strong>woh insaan jo woh ban rahe hain</strong>, aapki roz ki choices ki wajah se.<br><br>Zyada tar parents autopilot par hain. Khilate hain. Kapre pehnate hain. Fees dete hain. Umeed karte hain.<br><br><strong>Parenting mein koi neutral act nahi hota.</strong></div>
+    <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;"><button class="btn-primary" onclick="showPage('contact')">📅 All 21 Scripts Unlock Karein</button><button class="btn-ghost" onclick="showPage('ebooks')">📚 eBook Bhi Dekhein</button></div>
+  </div>
+
+  <div style="margin-top:64px;text-align:center;margin-bottom:40px;"><div class="eyebrow">Complete Calendar</div><h2 class="section-title">21 Din, <em>21 Truths</em></h2></div>
+
+  <div class="week-block">
+    <div class="week-block-header"><div class="wbh-num">01</div><div><div class="wbh-label" style="color:#fb7185;">Week One</div><div class="wbh-title">🔔 The Wake-Up</div></div><div class="wbh-line"></div></div>
+    <div class="days-grid">
+      <div class="day-pill free-day"><span class="day-n">01</span><span class="day-topic-icon">🔔</span><span class="day-short">Autopilot?</span></div>
+      <div class="day-pill"><span class="day-n">02</span><span class="day-topic-icon">🍎</span><span class="day-short">Food & Brain</span></div>
+      <div class="day-pill"><span class="day-n">03</span><span class="day-topic-icon">👕</span><span class="day-short">Clothes & Identity</span></div>
+      <div class="day-pill"><span class="day-n">04</span><span class="day-topic-icon">📚</span><span class="day-short">School Lie</span></div>
+      <div class="day-pill"><span class="day-n">05</span><span class="day-topic-icon">❤️</span><span class="day-short">Love Types</span></div>
+      <div class="day-pill"><span class="day-n">06</span><span class="day-topic-icon">🔬</span><span class="day-short">Gut Crisis</span></div>
+      <div class="day-pill"><span class="day-n">07</span><span class="day-topic-icon">🪞</span><span class="day-short">Reflection</span></div>
+    </div>
+  </div>
+  <div class="week-block">
+    <div class="week-block-header"><div class="wbh-num">02</div><div><div class="wbh-label" style="color:#14b8a6;">Week Two</div><div class="wbh-title">🧠 The Science</div></div><div class="wbh-line"></div></div>
+    <div class="days-grid">
+      <div class="day-pill"><span class="day-n">08</span><span class="day-topic-icon">🧬</span><span class="day-short">Gut-Brain</span></div>
+      <div class="day-pill"><span class="day-n">09</span><span class="day-topic-icon">🧩</span><span class="day-short">Identity Built</span></div>
+      <div class="day-pill"><span class="day-n">10</span><span class="day-topic-icon">⚖️</span><span class="day-short">Moral vs IQ</span></div>
+      <div class="day-pill"><span class="day-n">11</span><span class="day-topic-icon">💪</span><span class="day-short">Antifragile</span></div>
+      <div class="day-pill"><span class="day-n">12</span><span class="day-topic-icon">🤱</span><span class="day-short">Mothers' Blueprint</span></div>
+      <div class="day-pill"><span class="day-n">13</span><span class="day-topic-icon">📖</span><span class="day-short">Reading Aloud</span></div>
+      <div class="day-pill"><span class="day-n">14</span><span class="day-topic-icon">🏃</span><span class="day-short">Sports & Gender</span></div>
+    </div>
+  </div>
+  <div class="week-block">
+    <div class="week-block-header"><div class="wbh-num">03</div><div><div class="wbh-label" style="color:var(--glow);">Week Three</div><div class="wbh-title">⚡ The Action</div></div><div class="wbh-line"></div></div>
+    <div class="days-grid">
+      <div class="day-pill"><span class="day-n">15</span><span class="day-topic-icon">🍽️</span><span class="day-short">Food Audit</span></div>
+      <div class="day-pill"><span class="day-n">16</span><span class="day-topic-icon">💰</span><span class="day-short">Money Talk</span></div>
+      <div class="day-pill"><span class="day-n">17</span><span class="day-topic-icon">💭</span><span class="day-short">Pause & Reflect</span></div>
+      <div class="day-pill"><span class="day-n">18</span><span class="day-topic-icon">🏠</span><span class="day-short">Environment</span></div>
+      <div class="day-pill"><span class="day-n">19</span><span class="day-topic-icon">🤝</span><span class="day-short">5-Min Ritual</span></div>
+      <div class="day-pill"><span class="day-n">20</span><span class="day-topic-icon">🧭</span><span class="day-short">Mission Statement</span></div>
+      <div class="day-pill"><span class="day-n">21</span><span class="day-topic-icon">🏁</span><span class="day-short">The Pledge</span></div>
+    </div>
+  </div>
+</div></section>
+<div class="nl-section"><div class="container"><div class="nl-box"><div class="eyebrow">Unlock All 21 Days</div><h2>Saare Scripts <em>Abhi</em> Paaein</h2><span class="urdu-sub">تمام 21 اسکرپٹس فوری پائیں</span><p>Subscribe karein aur tamam 21 din ke complete scripts aapke inbox mein.</p><form class="nl-form" onsubmit="handleNL(event)"><input class="nl-input" type="email" placeholder="aapka@email.com" required><button class="nl-btn">Unlock Karein →</button></form></div></div></div>
+<footer class="footer"><div class="footer-inner"><div class="footer-grid"><div class="footer-brand"><span class="nav-logo" onclick="showPage('home')" style="cursor:pointer;">Afzal <em>Malik</em></span><p>Helping parents raise intentional children before 2030 changes everything.</p></div><div class="footer-col"><h4>Pages</h4><ul><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('series')">21-Day Series</a></li><li><a onclick="showPage('courses')">Courses</a></li><li><a onclick="showPage('ebooks')">eBooks</a></li></ul></div><div class="footer-col"><h4>Content</h4><ul><li><a onclick="showPage('blog')">Blog</a></li><li><a onclick="showPage('categories')">Categories</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div><div class="footer-col"><h4>Follow</h4><ul><li><a href="#">YouTube</a></li><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">LinkedIn</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copy">© 2025 Afzal Malik · iafzalmalik.me · 🇵🇰</div></div></div></footer>
+</div><!-- /series -->
+
+<!-- ════════════════════════════════════════
+     COURSES PAGE
+════════════════════════════════════════ -->
+<div id="page-courses" class="page">
+<div class="page-hero"><div class="page-hero-grid"></div><div class="page-hero-content">
+  <div class="page-eyebrow"><span class="page-eyebrow-dot"></span>Courses / کورسز</div>
+  <h1>Seekhein, <em>Badalein</em>, Aagay Barein</h1>
+  <div class="urdu-title">سیکھیں — اپنے بچوں کے لیے، اپنے مستقبل کے لیے</div>
+  <p>Structured, video-based courses jo aapko woh samajh dein jo school ne kabhi nahi sikhaya.</p>
+</div></div>
+<section><div class="container">
+  <div class="feat-course">
+    <div style="text-align:center;"><div style="background:linear-gradient(145deg,#1e1040,#2d1b69);border-radius:16px;padding:48px 32px;border:1px solid rgba(109,40,217,0.4);box-shadow:0 40px 80px rgba(0,0,0,0.4);"><div style="font-size:3.5rem;margin-bottom:12px;">🎓</div><div style="font-family:var(--serif);font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:8px;">Intentional Parenting</div><div style="color:#a78bfa;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;">Masterclass</div><div style="font-family:var(--serif);font-style:italic;color:#e2e2ee;font-size:1.1rem;">by Afzal Malik</div><div style="margin-top:24px;background:rgba(109,40,217,0.2);border:1px solid rgba(109,40,217,0.3);border-radius:8px;padding:10px;font-size:0.72rem;color:#a78bfa;letter-spacing:1px;">LAUNCHING SOON</div></div></div>
+    <div>
+      <div class="eyebrow">Flagship Course</div>
+      <h2 class="section-title">Intentional Parenting <em>Masterclass</em></h2>
+      <span class="urdu-sub">ارادے کے ساتھ پرورش — مکمل کورس</span>
+      <p class="section-body" style="margin-bottom:20px;">21-day series se kahin zyada gehri — yeh course aapko complete framework deta hai intentional parenting ka, science ke saath.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px;">
+        <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-size:1.1rem;">🎬</span><span style="font-size:0.9rem;color:var(--muted2);"><strong style="color:var(--text);">42 video lessons</strong> — Har topic par in-depth coverage</span></div>
+        <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-size:1.1rem;">📋</span><span style="font-size:0.9rem;color:var(--muted2);"><strong style="color:var(--text);">Workbooks</strong> — Har week ke liye practical exercises</span></div>
+        <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-size:1.1rem;">👥</span><span style="font-size:0.9rem;color:var(--muted2);"><strong style="color:var(--text);">Community Access</strong> — Private parent group</span></div>
+        <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-size:1.1rem;">🔄</span><span style="font-size:0.9rem;color:var(--muted2);"><strong style="color:var(--text);">Lifetime Access</strong> — Kabhi bhi, kahin bhi</span></div>
+      </div>
+      <button class="btn-primary" onclick="showPage('contact')">📩 Waitlist Mein Shamil Hon</button>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterItems(this,'all')">Sab</button>
+    <button class="filter-btn" onclick="filterItems(this,'parenting')">Parenting</button>
+    <button class="filter-btn" onclick="filterItems(this,'ai')">AI & Tech</button>
+    <button class="filter-btn" onclick="filterItems(this,'career')">Career</button>
+    <button class="filter-btn" onclick="filterItems(this,'food')">Food</button>
+  </div>
+  <div class="course-grid">
+    <div class="course-card" data-cat="parenting"><div class="course-thumb" style="background:linear-gradient(135deg,#1a1040,#4c1d95);">🧠</div><div class="course-body"><div style="display:flex;justify-content:space-between;margin-bottom:10px;"><div class="card-tag tag-violet">Parenting</div><span class="c-soon">Coming Soon</span></div><div class="course-title">Gut-Brain Parenting</div><span class="course-urdu">آنت اور دماغ — والدین کے لیے</span><div class="course-desc">Apne bachche ki gut health ko optimize karein aur seedha un ki mood, focus, aur behaviour improve karein.</div><div class="course-footer"><span class="course-price">PKR 1,499</span><button class="btn-ghost" style="padding:7px 14px;font-size:0.8rem;" onclick="showPage('contact')">Notify →</button></div></div></div>
+    <div class="course-card" data-cat="ai"><div class="course-thumb" style="background:linear-gradient(135deg,#0a1628,#1e3a5f);">🤖</div><div class="course-body"><div style="display:flex;justify-content:space-between;margin-bottom:10px;"><div class="card-tag tag-violet">AI & Tech</div><span class="c-soon">Coming Soon</span></div><div class="course-title">AI for Beginners — Pakistan Edition</div><span class="course-urdu">پاکستانیوں کے لیے اے آئی</span><div class="course-desc">Bina kisi technical background ke, AI tools ko samjhein aur apne kaam mein use karein. Bilkul Urdu mein.</div><div class="course-footer"><span class="course-price">PKR 999</span><button class="btn-ghost" style="padding:7px 14px;font-size:0.8rem;" onclick="showPage('contact')">Notify →</button></div></div></div>
+    <div class="course-card" data-cat="career"><div class="course-thumb" style="background:linear-gradient(135deg,#14532d,#166534);">💼</div><div class="course-body"><div style="display:flex;justify-content:space-between;margin-bottom:10px;"><div class="card-tag tag-teal">Career</div><span class="c-soon">Coming Soon</span></div><div class="course-title">2030-Proof Your Career</div><span class="course-urdu">اپنے کیریئر کو محفوظ کریں</span><div class="course-desc">Woh skills identify karein jo AI replace nahi kar sakti — aur plan karein apni career transition abhi se.</div><div class="course-footer"><span class="course-price">PKR 1,299</span><button class="btn-ghost" style="padding:7px 14px;font-size:0.8rem;" onclick="showPage('contact')">Notify →</button></div></div></div>
+    <div class="course-card" data-cat="food"><div class="course-thumb" style="background:linear-gradient(135deg,#78350f,#b45309);">🍎</div><div class="course-body"><div style="display:flex;justify-content:space-between;margin-bottom:10px;"><div class="card-tag tag-gold">Food Science</div><span class="c-soon">Coming Soon</span></div><div class="course-title">Food Deceptions — Deep Dive</div><span class="course-urdu">خوراک کی حقیقت</span><div class="course-desc">Sugar industry, processed food lobbying, aur gut microbiome — complete documentary-style course.</div><div class="course-footer"><span class="course-price">PKR 799</span><button class="btn-ghost" style="padding:7px 14px;font-size:0.8rem;" onclick="showPage('contact')">Notify →</button></div></div></div>
+    <div class="course-card" data-cat="parenting"><div class="course-thumb" style="background:linear-gradient(135deg,#1a0a1a,#4a1d96);">📖</div><div class="course-body"><div style="display:flex;justify-content:space-between;margin-bottom:10px;"><div class="card-tag tag-violet">Parenting</div><span class="c-free">Free</span></div><div class="course-title">Reading Aloud — The Method</div><span class="course-urdu">بلند آواز سے پڑھنا</span><div class="course-desc">Yeh short course bilkul free hai — aur aapke bachche ki empathy ko transform kar sakta hai.</div><div class="course-footer"><span class="course-price" style="color:var(--teal2);">FREE</span><button class="btn-primary" style="padding:7px 14px;font-size:0.8rem;" onclick="showPage('contact')">Abhi Lein →</button></div></div></div>
+    <div class="course-card" data-cat="ai"><div class="course-thumb" style="background:linear-gradient(135deg,#1e1040,#6d28d9);">💡</div><div class="course-body"><div style="display:flex;justify-content:space-between;margin-bottom:10px;"><div class="card-tag tag-violet">AI for Business</div><span class="c-soon">Coming Soon</span></div><div class="course-title">No-Code AI Automation</div><span class="course-urdu">بغیر کوڈ کے اے آئی</span><div class="course-desc">ChatGPT, Notion AI, Make.com — apne business ke workflows automate karein bina ek line code likhe.</div><div class="course-footer"><span class="course-price">PKR 1,799</span><button class="btn-ghost" style="padding:7px 14px;font-size:0.8rem;" onclick="showPage('contact')">Notify →</button></div></div></div>
+  </div>
+</div></section>
+<div class="nl-section"><div class="container"><div class="nl-box"><div class="eyebrow">Course Updates</div><h2>Pehle <em>Aap</em> Ko Pata Chale</h2><span class="urdu-sub">نئے کورس کی اطلاع پائیں</span><p>Early bird discount ke saath aapko pehle batayenge.</p><form class="nl-form" onsubmit="handleNL(event)"><input class="nl-input" type="email" placeholder="aapka@email.com" required><button class="nl-btn">Subscribe →</button></form></div></div></div>
+<footer class="footer"><div class="footer-inner"><div class="footer-grid"><div class="footer-brand"><span class="nav-logo" onclick="showPage('home')" style="cursor:pointer;">Afzal <em>Malik</em></span><p>Helping parents raise intentional children before 2030 changes everything.</p></div><div class="footer-col"><h4>Pages</h4><ul><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('series')">21-Day Series</a></li><li><a onclick="showPage('courses')">Courses</a></li><li><a onclick="showPage('ebooks')">eBooks</a></li></ul></div><div class="footer-col"><h4>Content</h4><ul><li><a onclick="showPage('blog')">Blog</a></li><li><a onclick="showPage('categories')">Categories</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div><div class="footer-col"><h4>Follow</h4><ul><li><a href="#">YouTube</a></li><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">LinkedIn</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copy">© 2025 Afzal Malik · iafzalmalik.me · 🇵🇰</div></div></div></footer>
+</div><!-- /courses -->
+
+<!-- ════════════════════════════════════════
+     BLOG PAGE
+════════════════════════════════════════ -->
+<div id="page-blog" class="page">
+<div class="page-hero"><div class="page-hero-grid"></div><div class="page-hero-content">
+  <div class="page-eyebrow"><span class="page-eyebrow-dot"></span>Blog / بلاگ</div>
+  <h1>Ideas Jo <em>Matter</em> Karti Hain</h1>
+  <div class="urdu-title">وہ خیالات جو فرق ڈالتے ہیں</div>
+  <p>AI, parenting, food science, careers — plain language mein jo aap ki zindagi se directly connect karti hain.</p>
+</div></div>
+<section><div class="container">
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterBlog(this,'all')">Sab</button>
+    <button class="filter-btn" onclick="filterBlog(this,'parenting')">Parenting</button>
+    <button class="filter-btn" onclick="filterBlog(this,'ai')">AI & Tech</button>
+    <button class="filter-btn" onclick="filterBlog(this,'food')">Food</button>
+    <button class="filter-btn" onclick="filterBlog(this,'career')">Career</button>
+    <button class="filter-btn" onclick="filterBlog(this,'education')">Education</button>
+  </div>
+  <div class="blog-layout">
+    <div>
+      <div class="blog-featured"><div class="bf-thumb">🧠</div><div class="bf-body"><div class="card-tag tag-violet" style="margin-bottom:12px;">Featured · Parenting</div><div class="bf-title">There Is No Neutral Act in Parenting</div><span class="bf-urdu">پرورش میں کوئی غیر جانبدار عمل نہیں ہوتا</span><div class="bf-excerpt">Har cheez jo aap apne bachche ke liye karte ya nahi karte — uski personality, character, aur future ko shape kar rahi hai. Yeh article aapko woh samjhata hai jo school ne kabhi nahi sikhaya.</div><div class="bf-meta"><span>📅 Dec 2024</span><span>⏱ 8 min read</span></div></div></div>
+      <div class="blog-list">
+        <div class="blog-item" data-bcat="food"><div class="bi-thumb">🍎</div><div><div class="card-tag tag-gold" style="margin-bottom:4px;">Food Science</div><div class="bi-title">Sugar Aur Aapke Bachche Ka Dimaag</div><span class="bi-urdu">چینی اور آپ کے بچے کا دماغ</span><div class="bi-meta">📅 Nov 2024 · ⏱ 6 min</div></div></div>
+        <div class="blog-item" data-bcat="ai"><div class="bi-thumb">🤖</div><div><div class="card-tag tag-violet" style="margin-bottom:4px;">AI & Tech</div><div class="bi-title">AGI 2027 Mein? Yahan Hai Sach</div><span class="bi-urdu">AGI 2027 میں؟ حقیقت کیا ہے</span><div class="bi-meta">📅 Nov 2024 · ⏱ 10 min</div></div></div>
+        <div class="blog-item" data-bcat="education"><div class="bi-thumb">🎓</div><div><div class="card-tag tag-teal" style="margin-bottom:4px;">Education</div><div class="bi-title">Pakistan Mein Education Ki Asli Haqeeqat</div><span class="bi-urdu">پاکستان میں تعلیم کی اصلی حقیقت</span><div class="bi-meta">📅 Oct 2024 · ⏱ 7 min</div></div></div>
+        <div class="blog-item" data-bcat="career"><div class="bi-thumb">💼</div><div><div class="card-tag tag-teal" style="margin-bottom:4px;">Career</div><div class="bi-title">2030 Mein Kaun Si Jobs Bachein Gi?</div><span class="bi-urdu">2030 میں کون سی نوکریاں باقی رہیں گی؟</span><div class="bi-meta">📅 Oct 2024 · ⏱ 9 min</div></div></div>
+        <div class="blog-item" data-bcat="parenting"><div class="bi-thumb">❤️</div><div><div class="card-tag tag-violet" style="margin-bottom:4px;">Parenting</div><div class="bi-title">Antifragile Bachche Kaise Raise Karein</div><span class="bi-urdu">مضبوط بچے کیسے پالیں</span><div class="bi-meta">📅 Sep 2024 · ⏱ 8 min</div></div></div>
+        <div class="blog-item" data-bcat="food"><div class="bi-thumb">🏭</div><div><div class="card-tag tag-gold" style="margin-bottom:4px;">Food Industry</div><div class="bi-title">Processed Food Ka Sach Jo Industry Chupaati Hai</div><span class="bi-urdu">پروسیسڈ فوڈ کا راز</span><div class="bi-meta">📅 Sep 2024 · ⏱ 11 min</div></div></div>
+        <div class="blog-item" data-bcat="ai"><div class="bi-thumb">🧬</div><div><div class="card-tag tag-violet" style="margin-bottom:4px;">AI & Parenting</div><div class="bi-title">Apne Bachche Ko AI-Ready Kaise Banayein</div><span class="bi-urdu">اپنے بچے کو مستقبل کے لیے تیار کریں</span><div class="bi-meta">📅 Aug 2024 · ⏱ 7 min</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="sidebar-widget"><div class="sw-title">Categories</div><div class="cat-link" onclick="showPage('categories')">🎓 Education<span class="ci-count">8</span></div><div class="cat-link" onclick="showPage('categories')">💼 Jobs & Career<span class="ci-count">12</span></div><div class="cat-link" onclick="showPage('categories')">🍎 Food Science<span class="ci-count">6</span></div><div class="cat-link" onclick="showPage('categories')">🤖 AI & Tech<span class="ci-count">15</span></div><div class="cat-link" onclick="showPage('categories')">🏢 Corporate<span class="ci-count">5</span></div></div>
+      <div class="sidebar-widget" style="background:linear-gradient(135deg,#0d0a26,#1a1040);border-color:rgba(109,40,217,0.3);"><div class="sw-title">Newsletter</div><p style="font-size:0.85rem;color:var(--muted2);margin-bottom:14px;font-weight:300;">Har Sunday ek free insight.</p><form onsubmit="handleNL(event)"><input class="nl-input" type="email" placeholder="Email" style="margin-bottom:10px;width:100%;" required><button class="nl-btn" style="width:100%;">Subscribe →</button></form></div>
+    </div>
+  </div>
+</div></section>
+<footer class="footer"><div class="footer-inner"><div class="footer-grid"><div class="footer-brand"><span class="nav-logo" onclick="showPage('home')" style="cursor:pointer;">Afzal <em>Malik</em></span><p>Helping parents raise intentional children before 2030 changes everything.</p></div><div class="footer-col"><h4>Pages</h4><ul><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('series')">21-Day Series</a></li><li><a onclick="showPage('courses')">Courses</a></li><li><a onclick="showPage('ebooks')">eBooks</a></li></ul></div><div class="footer-col"><h4>Content</h4><ul><li><a onclick="showPage('blog')">Blog</a></li><li><a onclick="showPage('categories')">Categories</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div><div class="footer-col"><h4>Follow</h4><ul><li><a href="#">YouTube</a></li><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">LinkedIn</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copy">© 2025 Afzal Malik · iafzalmalik.me · 🇵🇰</div></div></div></footer>
+</div><!-- /blog -->
+
+<!-- ════════════════════════════════════════
+     CATEGORIES PAGE
+════════════════════════════════════════ -->
+<div id="page-categories" class="page">
+<div class="page-hero"><div class="page-hero-grid"></div><div class="page-hero-content">
+  <div class="page-eyebrow"><span class="page-eyebrow-dot"></span>Categories / موضوعات</div>
+  <h1>Woh <em>Topics</em> Jo Matter Karti Hain</h1>
+  <div class="urdu-title">پانچ موضوعات جو آپ کی زندگی بدل دیں گے</div>
+  <p>Education se food tak, AI se corporate sector tak — har woh topic jis par Afzal Malik research karta aur likhta hai.</p>
+</div></div>
+<section><div class="container">
+  <div class="cat-section-block cat-edu">
+    <div class="cat-header"><div class="ch-icon">🎓</div><div class="ch-info"><div class="ch-label">Category 01</div><div class="ch-title">Future of Education</div><span class="ch-urdu">تعلیم کا مستقبل</span></div><div class="ch-count">8</div></div>
+    <div class="topics-row">
+      <div class="topic-item"><div class="ti-icon">🏫</div><div class="ti-title">School Lie — The Truth</div><span class="ti-urdu">اسکول کا جھوٹ</span><div class="ti-desc">School certificate vs actual preparation — farq kya hai?</div></div>
+      <div class="topic-item"><div class="ti-icon">🧮</div><div class="ti-title">Financial Literacy for Kids</div><span class="ti-urdu">بچوں کی مالی تعلیم</span><div class="ti-desc">Paise ka system — jab sikhana chahiye aur kaise.</div></div>
+      <div class="topic-item"><div class="ti-icon">🎨</div><div class="ti-title">Creative Thinking</div><span class="ti-urdu">تخلیقی سوچ</span><div class="ti-desc">AI ke daur mein creativity sabse badi skill hai.</div></div>
+      <div class="topic-item"><div class="ti-icon">⚖️</div><div class="ti-title">Moral Intelligence</div><span class="ti-urdu">اخلاقی ذہانت</span><div class="ti-desc">IQ se bada — woh cheez jo character banati hai.</div></div>
+      <div class="topic-item"><div class="ti-icon">📖</div><div class="ti-title">Reading as a Tool</div><span class="ti-urdu">پڑھنا ایک ہتھیار</span><div class="ti-desc">Reading aloud aur Pause & Reflect method.</div></div>
+      <div class="topic-item"><div class="ti-icon">🌍</div><div class="ti-title">Global vs Local Education</div><span class="ti-urdu">عالمی بمقابلہ مقامی تعلیم</span><div class="ti-desc">Pakistan ke students ko kya chahiye alag?</div></div>
+    </div>
+  </div>
+  <div class="cat-section-block cat-jobs" style="margin-top:64px;">
+    <div class="cat-header"><div class="ch-icon">💼</div><div class="ch-info"><div class="ch-label">Category 02</div><div class="ch-title">Jobs & Careers</div><span class="ch-urdu">نوکریاں اور کیریئر</span></div><div class="ch-count">12</div></div>
+    <div class="topics-row">
+      <div class="topic-item"><div class="ti-icon">⚰️</div><div class="ti-title">Dying Jobs — 2030 List</div><span class="ti-urdu">ختم ہونے والی نوکریاں</span><div class="ti-desc">Data-backed list — kaun si jobs AI replace karega.</div></div>
+      <div class="topic-item"><div class="ti-icon">🚀</div><div class="ti-title">Jobs That Will Survive</div><span class="ti-urdu">باقی رہنے والی نوکریاں</span><div class="ti-desc">Human skills jo AI kabhi replace nahi kar sakta.</div></div>
+      <div class="topic-item"><div class="ti-icon">🔄</div><div class="ti-title">Career Transition Guide</div><span class="ti-urdu">کیریئر تبدیلی کا رہنما</span><div class="ti-desc">Abhi kahan shift karein aur kaise plan karein.</div></div>
+      <div class="topic-item"><div class="ti-icon">👶</div><div class="ti-title">Choosing Careers for Kids</div><span class="ti-urdu">بچوں کے لیے کیریئر</span><div class="ti-desc">2030 mein kya study karwayein apne bachche ko?</div></div>
+      <div class="topic-item"><div class="ti-icon">🇵🇰</div><div class="ti-title">Pakistan Job Market 2030</div><span class="ti-urdu">پاکستان میں نوکریاں</span><div class="ti-desc">Local context mein AI ka asar aur opportunities.</div></div>
+      <div class="topic-item"><div class="ti-icon">💡</div><div class="ti-title">Freelancing & AI</div><span class="ti-urdu">فری لانسنگ اور اے آئی</span><div class="ti-desc">AI tools se Pakistani freelancers kaise aagay barein.</div></div>
+    </div>
+  </div>
+  <div class="cat-section-block cat-food" style="margin-top:64px;">
+    <div class="cat-header"><div class="ch-icon">🍎</div><div class="ch-info"><div class="ch-label">Category 03</div><div class="ch-title">Food Deceptions</div><span class="ch-urdu">خوراک کی حقیقت</span></div><div class="ch-count">6</div></div>
+    <div class="topics-row">
+      <div class="topic-item"><div class="ti-icon">🧬</div><div class="ti-title">Gut-Brain Axis</div><span class="ti-urdu">آنت اور دماغ کا تعلق</span><div class="ti-desc">90% serotonin gut mein — aur iska matlab kya hai.</div></div>
+      <div class="topic-item"><div class="ti-icon">🍬</div><div class="ti-title">Sugar — The Silent Damage</div><span class="ti-urdu">چینی — خاموش نقصان</span><div class="ti-desc">Anxiety, ADHD, mood swings — sugar ka asli role.</div></div>
+      <div class="topic-item"><div class="ti-icon">🏭</div><div class="ti-title">Processed Food Industry</div><span class="ti-urdu">پروسیسڈ فوڈ انڈسٹری</span><div class="ti-desc">Woh lobby jo aapko sach nahi jaanne deti.</div></div>
+      <div class="topic-item"><div class="ti-icon">🥗</div><div class="ti-title">Family Food Audit</div><span class="ti-urdu">خاندانی خوراک کا جائزہ</span><div class="ti-desc">Is hafte ek cheez badlein — yahan hai kaise.</div></div>
+      <div class="topic-item"><div class="ti-icon">🫙</div><div class="ti-title">Fermented Foods & Kids</div><span class="ti-urdu">خمیری غذائیں اور بچے</span><div class="ti-desc">Dahi, lassi, achaar — gut health ke liye best options.</div></div>
+      <div class="topic-item"><div class="ti-icon">🧪</div><div class="ti-title">Food Labels Decoded</div><span class="ti-urdu">فوڈ لیبل کا سچ</span><div class="ti-desc">Ingredients list mein sugar ke 56 naam.</div></div>
+    </div>
+  </div>
+  <div class="cat-section-block cat-tech" style="margin-top:64px;">
+    <div class="cat-header"><div class="ch-icon">🤖</div><div class="ch-info"><div class="ch-label">Category 04</div><div class="ch-title">Tech Innovation & AI</div><span class="ch-urdu">ٹیکنالوجی اور اے آئی</span></div><div class="ch-count">15</div></div>
+    <div class="topics-row">
+      <div class="topic-item"><div class="ti-icon">🧠</div><div class="ti-title">AGI — Asli Matlab</div><span class="ti-urdu">AGI کا اصلی مطلب</span><div class="ti-desc">AGI kya hai aur yeh aapki zindagi kab badlega.</div></div>
+      <div class="topic-item"><div class="ti-icon">⚡</div><div class="ti-title">ASI — The Next Step</div><span class="ti-urdu">ASI — اگلا قدم</span><div class="ti-desc">Superintelligence — timeline aur preparation.</div></div>
+      <div class="topic-item"><div class="ti-icon">🛠️</div><div class="ti-title">Best AI Tools 2025</div><span class="ti-urdu">بہترین اے آئی ٹولز</span><div class="ti-desc">Har hafte tested tools — honest reviews.</div></div>
+      <div class="topic-item"><div class="ti-icon">🏢</div><div class="ti-title">AI for Business</div><span class="ti-urdu">کاروبار کے لیے اے آئی</span><div class="ti-desc">No-code automation jo is hafte se shuru ho sake.</div></div>
+      <div class="topic-item"><div class="ti-icon">👶</div><div class="ti-title">Kids & AI Safety</div><span class="ti-urdu">بچے اور اے آئی</span><div class="ti-desc">Bacchon ko AI se kaise milwayein safely.</div></div>
+      <div class="topic-item"><div class="ti-icon">🌐</div><div class="ti-title">Tech Achievements 2025</div><span class="ti-urdu">2025 کی ٹیک کامیابیاں</span><div class="ti-desc">Woh innovations jo duniya badalein gi.</div></div>
+    </div>
+  </div>
+  <div class="cat-section-block cat-corp" style="margin-top:64px;">
+    <div class="cat-header"><div class="ch-icon">🏢</div><div class="ch-info"><div class="ch-label">Category 05</div><div class="ch-title">Corporate Sector</div><span class="ch-urdu">کارپوریٹ سیکٹر</span></div><div class="ch-count">5</div></div>
+    <div class="topics-row">
+      <div class="topic-item"><div class="ti-icon">📊</div><div class="ti-title">AI in Corporate Pakistan</div><span class="ti-urdu">پاکستانی کارپوریٹ میں اے آئی</span><div class="ti-desc">Kaun si companies AI adopt kar rahi hain aur kaise.</div></div>
+      <div class="topic-item"><div class="ti-icon">🤝</div><div class="ti-title">Human Skills vs Automation</div><span class="ti-urdu">انسانی ہنر بمقابلہ آٹومیشن</span><div class="ti-desc">Corporate mein kaun bach jayega aur kaun nahi.</div></div>
+      <div class="topic-item"><div class="ti-icon">👔</div><div class="ti-title">Leadership in AI Era</div><span class="ti-urdu">اے آئی دور میں قیادت</span><div class="ti-desc">2030 mein ek leader kaisa hona chahiye.</div></div>
+      <div class="topic-item"><div class="ti-icon">💰</div><div class="ti-title">Salary Negotiations 2025</div><span class="ti-urdu">تنخواہ کا مذاکرہ</span><div class="ti-desc">AI market mein apni value kaise negotiate karein.</div></div>
+      <div class="topic-item"><div class="ti-icon">🏗️</div><div class="ti-title">Building a Personal Brand</div><span class="ti-urdu">ذاتی برانڈ بنانا</span><div class="ti-desc">Corporate mein survive karne ka sab se bada weapon.</div></div>
+      <div class="topic-item"><div class="ti-icon">🌱</div><div class="ti-title">Side Income Strategies</div><span class="ti-urdu">اضافی آمدنی</span><div class="ti-desc">Corporate job ke saath parallel income kaise banayein.</div></div>
+    </div>
+  </div>
+</div></section>
+<div class="nl-section"><div class="container"><div class="nl-box"><div class="eyebrow">Stay Updated</div><h2>Har Topic Par <em>Latest</em> Content</h2><span class="urdu-sub">ہر موضوع پر تازہ مواد پائیں</span><p>Har Sunday — ek topic per in-depth insight. Bilkul free.</p><form class="nl-form" onsubmit="handleNL(event)"><input class="nl-input" type="email" placeholder="aapka@email.com" required><button class="nl-btn">Subscribe →</button></form></div></div></div>
+<footer class="footer"><div class="footer-inner"><div class="footer-grid"><div class="footer-brand"><span class="nav-logo" onclick="showPage('home')" style="cursor:pointer;">Afzal <em>Malik</em></span><p>Helping parents raise intentional children before 2030 changes everything.</p></div><div class="footer-col"><h4>Pages</h4><ul><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('series')">21-Day Series</a></li><li><a onclick="showPage('courses')">Courses</a></li><li><a onclick="showPage('ebooks')">eBooks</a></li></ul></div><div class="footer-col"><h4>Content</h4><ul><li><a onclick="showPage('blog')">Blog</a></li><li><a onclick="showPage('categories')">Categories</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div><div class="footer-col"><h4>Follow</h4><ul><li><a href="#">YouTube</a></li><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">LinkedIn</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copy">© 2025 Afzal Malik · iafzalmalik.me · 🇵🇰</div></div></div></footer>
+</div><!-- /categories -->
+
+<!-- ════════════════════════════════════════
+     ABOUT PAGE
+════════════════════════════════════════ -->
+<div id="page-about" class="page">
+<div class="page-hero"><div class="page-hero-grid"></div><div class="page-hero-content">
+  <div class="page-eyebrow"><span class="page-eyebrow-dot"></span>About / میرے بارے میں</div>
+  <h1>MBA Jisne <em>AI</em> Ko Decode Kiya</h1>
+  <div class="urdu-title">وہ شخص جو مشکل باتیں آسان کرتا ہے</div>
+  <p>Main Afzal Malik hoon — aur main woh bridge hoon jo AI aur real people ke darmiyan missing hai.</p>
+</div></div>
+<section><div class="container">
+  <div class="about-main">
+    <div class="profile-card">
+      <div class="profile-avatar">AM</div>
+      <div class="profile-name">Afzal Malik</div>
+      <div class="profile-title">MBA · AI Translator · Future Strategist</div>
+      <span class="profile-urdu">اے آئی ترجمان اور مستقبل کا حکمت کار</span>
+      <div class="pdivider"></div>
+      <div class="profile-stat"><span class="ps-label">Based in</span><span class="ps-value">Pakistan 🇵🇰</span></div>
+      <div class="profile-stat"><span class="ps-label">Education</span><span class="ps-value">MBA</span></div>
+      <div class="profile-stat"><span class="ps-label">Focus</span><span class="ps-value">AI + Parenting</span></div>
+      <div class="pdivider"></div>
+      <button class="btn-primary" style="width:100%;justify-content:center;margin-top:4px;" onclick="showPage('contact')">Baat Karein →</button>
+    </div>
+    <div>
+      <div class="story-block">
+        <h3>Main Kaun Hoon — <em>Sacchi Baat</em></h3>
+        <span class="urdu-sub">میں کون ہوں — حقیقت میں</span>
+        <p>Main Afzal Malik hoon — MBA student, AI researcher, aur woh insaan jo is sawaal ka jawab dhundh raha hai: <strong>"2030 tak hamari zindagein kaisi dikhein gi — aur hum abhi kya karein?"</strong></p>
+        <p>Mujhe AI technology mein technically gehra interest hai — lekin mera asli passion woh parents mein hai jo worried hain. Woh teachers mein hai jo confused hain. Woh professionals mein hai jo adapt karna chahte hain lekin nahi jaante kahaan se shuroo karein.</p>
+        <p>Main woh bridge hoon jo <strong>complex research ko simple action</strong> mein convert karta hai.</p>
+      </div>
+      <div class="mission-box">
+        <div class="mission-quote">"Every parent who reads my work should leave <em>more capable</em>, not just more informed."</div>
+        <div style="font-family:var(--urdu);direction:rtl;font-size:0.9rem;color:var(--muted2);">ہر والدین جو میرا کام پڑھے، زیادہ قابل بن کر جائے</div>
+      </div>
+      <div class="story-block">
+        <h3>Main Kya <em>Believe</em> Karta Hoon</h3>
+        <span class="urdu-sub">میرے عقائد</span>
+        <div class="values-grid">
+          <div class="value-item"><span class="vi-icon">🎯</span><div class="vi-text"><strong>Clarity over Complexity</strong><span>Mushkil concepts ko simple banana sabse badi skill hai.</span></div></div>
+          <div class="value-item"><span class="vi-icon">📊</span><div class="vi-text"><strong>Evidence over Opinion</strong><span>Har cheez research-backed honi chahiye.</span></div></div>
+          <div class="value-item"><span class="vi-icon">⚡</span><div class="vi-text"><strong>Action over Information</strong><span>Sirf jaanna kaafi nahi — karna zaruri hai.</span></div></div>
+          <div class="value-item"><span class="vi-icon">🌱</span><div class="vi-text"><strong>Preparation over Provision</strong><span>Khilana kaafi nahi — tayar karna zaruri hai.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+<div class="nl-section"><div class="container"><div class="nl-box"><div class="eyebrow">My Journey</div><h2>Saath <em>Chalein</em></h2><span class="urdu-sub">میرے ساتھ اس سفر میں شامل ہوں</span><p>Har Sunday — ek insight jo aapko AI revolution ke liye aur ready banaye.</p><form class="nl-form" onsubmit="handleNL(event)"><input class="nl-input" type="email" placeholder="aapka@email.com" required><button class="nl-btn">Subscribe →</button></form></div></div></div>
+<footer class="footer"><div class="footer-inner"><div class="footer-grid"><div class="footer-brand"><span class="nav-logo" onclick="showPage('home')" style="cursor:pointer;">Afzal <em>Malik</em></span><p>Helping parents raise intentional children before 2030 changes everything.</p></div><div class="footer-col"><h4>Pages</h4><ul><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('series')">21-Day Series</a></li><li><a onclick="showPage('courses')">Courses</a></li><li><a onclick="showPage('ebooks')">eBooks</a></li></ul></div><div class="footer-col"><h4>Content</h4><ul><li><a onclick="showPage('blog')">Blog</a></li><li><a onclick="showPage('categories')">Categories</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div><div class="footer-col"><h4>Follow</h4><ul><li><a href="#">YouTube</a></li><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">LinkedIn</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copy">© 2025 Afzal Malik · iafzalmalik.me · 🇵🇰</div></div></div></footer>
+</div><!-- /about -->
+
+<!-- ════════════════════════════════════════
+     CONTACT PAGE
+════════════════════════════════════════ -->
+<div id="page-contact" class="page">
+<div class="page-hero"><div class="page-hero-grid"></div><div class="page-hero-content">
+  <div class="page-eyebrow"><span class="page-eyebrow-dot"></span>Contact / رابطہ</div>
+  <h1>Baat <em>Karein</em></h1>
+  <div class="urdu-title">میں ہر پیغام پڑھتا ہوں اور جواب دیتا ہوں</div>
+  <p>Koi bhi sawaal, collaboration idea, ya sirf salam — main khud jawab deta hoon. Pakistan se, personally.</p>
+</div></div>
+<section><div class="container">
+  <div class="contact-layout">
+    <div>
+      <h2 style="font-family:var(--serif);font-size:2.2rem;font-weight:700;margin-bottom:10px;">Aapka <em style="color:var(--glow);font-style:italic;">Sawaal</em> Important Hai</h2>
+      <span class="urdu-sub" style="margin-bottom:20px;display:block;">آپ کا سوال اہم ہے</span>
+      <p style="color:var(--muted2);line-height:1.85;margin-bottom:28px;font-size:0.97rem;font-weight:300;">Main ek curious insaan hoon jo AI aur parenting ki research karta hai aur real people ke saath share karta hai. Agar aap baat karna chahte hain — main yahan hoon.</p>
+      <a href="mailto:hello@iafzalmalik.me" class="contact-method"><span class="cm-icon">✉️</span><div><div class="cm-label">Email</div><div class="cm-value">hello@iafzalmalik.me</div></div></a>
+      <div class="contact-method"><span class="cm-icon">🌐</span><div><div class="cm-label">Website</div><div class="cm-value">iafzalmalik.me</div></div></div>
+      <div class="contact-method"><span class="cm-icon">📸</span><div><div class="cm-label">Instagram</div><div class="cm-value">@afzalmalik</div></div></div>
+      <div class="contact-method"><span class="cm-icon">💼</span><div><div class="cm-label">LinkedIn</div><div class="cm-value">Afzal Malik</div></div></div>
+      <div style="margin-top:28px;"><div class="eyebrow" style="margin-bottom:12px;">Main Kisse Baat Karna Chahta Hoon</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:10px;font-size:0.87rem;color:var(--muted2);padding:7px 0;border-bottom:1px solid var(--border);"><span style="width:6px;height:6px;border-radius:50%;background:var(--glow);flex-shrink:0;"></span>Parents with parenting questions</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:0.87rem;color:var(--muted2);padding:7px 0;border-bottom:1px solid var(--border);"><span style="width:6px;height:6px;border-radius:50%;background:var(--glow);flex-shrink:0;"></span>Publishers for book collaboration</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:0.87rem;color:var(--muted2);padding:7px 0;border-bottom:1px solid var(--border);"><span style="width:6px;height:6px;border-radius:50%;background:var(--glow);flex-shrink:0;"></span>Brands aligned with AI education</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:0.87rem;color:var(--muted2);padding:7px 0;border-bottom:1px solid var(--border);"><span style="width:6px;height:6px;border-radius:50%;background:var(--glow);flex-shrink:0;"></span>Podcasts & speaking invitations</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:0.87rem;color:var(--muted2);padding:7px 0;"><span style="width:6px;height:6px;border-radius:50%;background:var(--glow);flex-shrink:0;"></span>Aur baaki sab bhi — genuinely</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-card">
+      <h3>Message Bhejein</h3>
+      <span class="urdu-sub">پیغام بھیجیں</span>
+      <form id="contactForm" onsubmit="handleContact(event)">
+        <div class="form-row2">
+          <div class="form-group"><label>Pehla Naam</label><input class="form-input" type="text" placeholder="Afzal" required></div>
+          <div class="form-group"><label>Akhri Naam</label><input class="form-input" type="text" placeholder="Malik"></div>
+        </div>
+        <div class="form-group"><label>Email</label><input class="form-input" type="email" placeholder="aapka@email.com" required></div>
+        <div class="form-group"><label>Subject</label>
+          <select class="form-select"><option value="">-- Chunein --</option><option>Parenting Question</option><option>Book / eBook Inquiry</option><option>Course Inquiry</option><option>Collaboration / Brand</option><option>Speaking Invitation</option><option>General Question</option></select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea class="form-textarea" placeholder="Apna message yahan likhein..." required></textarea></div>
+        <button class="form-submit" type="submit">Message Bhejein →</button>
       </form>
     </div>
   </div>
-</div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="nav-logo">Afzal <em>Malik</em></a>
-        <p>Helping parents raise intentional children before 2030 changes everything.</p>
-        <div class="footer-urdu">2030 سے پہلے ارادے کے ساتھ</div>
-      </div>
-      <div class="footer-col">
-        <h4>Pages</h4>
-        <ul>
-          <li><a href="about.html">About</a></li>
-          <li><a href="series.html">21-Day Series</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="ebooks.html">eBooks</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Content</h4>
-        <ul>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="categories.html">Categories</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Follow</h4>
-        <ul>
-          <li><a href="#">YouTube</a></li>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">TikTok</a></li>
-          <li><a href="#">LinkedIn</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2025 Afzal Malik · <a href="https://iafzalmalik.me">iafzalmalik.me</a> · Built with purpose in Pakistan 🇵🇰</div>
-      <div class="footer-social">
-        <a href="#">▶</a><a href="#">📸</a><a href="#">🎵</a><a href="#">in</a>
-      </div>
-    </div>
-  </div>
-</footer>
+  <div style="margin-top:80px;"><div style="text-align:center;margin-bottom:36px;"><div class="eyebrow">FAQ / عام سوالات</div><h2 class="section-title">Aksar Pooche Jaane Wale <em>Sawalat</em></h2></div>
+  <div class="faq-grid">
+    <div class="faq-item"><div class="faq-q">Kya aap Pakistan mein available hain?</div><span class="faq-urdu">کیا آپ پاکستان میں دستیاب ہیں؟</span><div class="faq-a">Haan — main Pakistan mein hoon aur primarily Pakistani audience ke liye content banaata hoon. Local context ko main deeply samjhta hoon.</div></div>
+    <div class="faq-item"><div class="faq-q">Kitne time mein jawab milega?</div><span class="faq-urdu">جواب کتنے وقت میں ملے گا؟</span><div class="faq-a">Har message ko main personally padhta hoon aur 24-48 ghante mein jawab dene ki koshish karta hoon.</div></div>
+    <div class="faq-item"><div class="faq-q">Kya free consultation hoti hai?</div><span class="faq-urdu">کیا مفت مشاورت ہوتی ہے؟</span><div class="faq-a">Ek short discovery call bilkul free hai. Longer consultations ke baare mein baat karte hain contact ke baad.</div></div>
+    <div class="faq-item"><div class="faq-q">Bulk eBook ya course purchase?</div><span class="faq-urdu">اجتماعی خریداری؟</span><div class="faq-a">Schools, organizations, ya companies ke liye bulk pricing available hai. Email karein directly.</div></div>
+  </div></div>
+</div></section>
+<footer class="footer"><div class="footer-inner"><div class="footer-grid"><div class="footer-brand"><span class="nav-logo" onclick="showPage('home')" style="cursor:pointer;">Afzal <em>Malik</em></span><p>Helping parents raise intentional children before 2030 changes everything.</p></div><div class="footer-col"><h4>Pages</h4><ul><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('series')">21-Day Series</a></li><li><a onclick="showPage('courses')">Courses</a></li><li><a onclick="showPage('ebooks')">eBooks</a></li></ul></div><div class="footer-col"><h4>Content</h4><ul><li><a onclick="showPage('blog')">Blog</a></li><li><a onclick="showPage('categories')">Categories</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div><div class="footer-col"><h4>Follow</h4><ul><li><a href="#">YouTube</a></li><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">LinkedIn</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copy">© 2025 Afzal Malik · iafzalmalik.me · 🇵🇰</div></div></div></footer>
+</div><!-- /contact -->
 
-<script src="assets/main.js"></script>
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+// ─── PAGE NAVIGATION ──────────────────────
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  // update nav active
+  document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(a => a.classList.remove('active'));
+  const map = {home:'',about:'About',series:'21 Days',courses:'Courses',ebooks:'eBooks',blog:'Blog',categories:'Topics',contact:'Contact'};
+  document.querySelectorAll('.nav-links a').forEach(a => { if(a.textContent.trim() === map[name]) a.classList.add('active'); });
+  // re-trigger reveals
+  setTimeout(initReveal, 100);
+}
+
+// ─── NAV SCROLL ───────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ─── MOBILE NAV ───────────────────────────
+function toggleMobileNav() {
+  document.getElementById('mobileNav').classList.toggle('open');
+}
+
+// ─── SCROLL REVEAL ────────────────────────
+function initReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.page.active .reveal').forEach(el => { if(!el.classList.contains('visible')) obs.observe(el); });
+}
+initReveal();
+
+// ─── FILTER (ebooks & courses) ────────────
+function filterItems(btn, cat) {
+  const bar = btn.closest('.filter-bar');
+  bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const grid = bar.nextElementSibling;
+  if (!grid) return;
+  grid.querySelectorAll('[data-cat]').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+  });
+}
+
+// ─── FILTER (blog) ────────────────────────
+function filterBlog(btn, cat) {
+  const bar = btn.closest('.filter-bar');
+  bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.blog-item[data-bcat]').forEach(item => {
+    item.style.display = (cat === 'all' || item.dataset.bcat === cat) ? '' : 'none';
+  });
+}
+
+// ─── NEWSLETTER ───────────────────────────
+function handleNL(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  const orig = btn.textContent;
+  btn.textContent = '✓ Subscribe ho gaye!';
+  btn.style.background = '#059669';
+  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 3000);
+}
+
+// ─── CONTACT FORM ─────────────────────────
+function handleContact(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = '✓ Message bhej diya!';
+  btn.style.background = '#059669';
+  setTimeout(() => { btn.textContent = 'Message Bhejein →'; btn.style.background = ''; }, 3000);
+}
+</script>
 </body>
 </html>
